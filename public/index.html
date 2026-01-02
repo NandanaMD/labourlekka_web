@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labour Lekka - Offline Labour Management App for Small Businesses</title>
+    <meta name="description" content="Labour Lekka is an offline labour management app for small businesses. Manage your workforce efficiently, even without internet access." />
+    <meta name="theme-color" content="#3DDC84" />
+    <meta property="og:title" content="Labour Lekka - Offline Labour Management App" />
+    <meta property="og:description" content="Offline labour management for small businesses. Manage your workforce efficiently, even without internet access." />
+    <meta property="og:image" content="logo_lale.jpeg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://labourlekka.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Labour Lekka - Offline Labour Management App" />
+    <meta name="twitter:description" content="Offline labour management for small businesses. Manage your workforce efficiently, even without internet access." />
+    <meta name="twitter:image" content="logo_lale.jpeg" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%),
+                        url('bg-placeholder.png') center/cover, #e5e7eb;
+            background-attachment: fixed;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 48px 32px 40px 32px;
+            border-radius: 28px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 60px rgba(30, 41, 59, 0.18);
+            transition: box-shadow 0.2s;
+        }
+
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 700;
+            color: #1e293b;
+            border-radius: 22px;
+        }
+
+        .app-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 22px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: #64748b;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+        .tagline-dark {
+            color: #334155;
+        }
+        .placeholder-note {
+            margin-top: 32px;
+            color: #334155;
+            font-size: 14px;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: transparent;
+            color: #222;
+            padding: 0;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: box-shadow 0.2s, background 0.2s;
+        }
+
+        .download-btn:focus {
+            box-shadow: 0 0 0 3px #3DDC84;
+            background: #f0fdf4;
+        }
+        .download-btn:hover img {
+            filter: brightness(1.1) drop-shadow(0 2px 8px #3DDC84aa);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            background: #1a1a1a;
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        .playstore-badge {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .playstore-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .privacy-link {
+            color: #64748b;
+            font-size: 14px;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+
+        .privacy-link:hover {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            animation: fadeIn 0.2s;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            padding: 24px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 24px;
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #94a3b8;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .close-btn:hover {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .modal-body {
+            padding: 24px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .modal-body h3 {
+            font-size: 18px;
+            color: #1e293b;
+            margin: 20px 0 12px;
+            font-weight: 600;
+        }
+
+        .modal-body h3:first-child {
+            margin-top: 0;
+        }
+
+        .modal-body p {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .modal-body ul {
+            margin: 12px 0;
+            padding-left: 20px;
+        }
+
+        .modal-body li {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            .tagline {
+                font-size: 16px;
+            }
+
+            .download-btn {
+                padding: 14px 40px;
+                font-size: 16px;
+            }
+
+            .app-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 40px;
+                margin-bottom: 24px;
+            }
+
+            .modal-content {
+                max-height: 90vh;
+            }
+
+            .modal-header {
+                padding: 20px;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="container" role="main" aria-label="Labour Lekka landing section">
+        <div class="app-icon">
+            <img src="logo_lale.jpeg" alt="Labour Lekka app logo, stylized double L" width="100" height="100" />
+        </div>
+        <h1 id="main-title">Labour Lekka</h1>
+        <p class="tagline tagline-dark">Offline labour management made simple.</p>
+        <a href="#" class="download-btn" id="downloadBtn" aria-label="Download Labour Lekka on Google Play" tabindex="0">
+            <img src="google-play-badge.svg" alt="Get it on Google Play badge" style="height: 60px; width: auto; display: inline-block; vertical-align: middle;" />
+        </a>
+        <div class="placeholder-note">
+            <em>Background image placeholder: <strong>bg-placeholder.png</strong> (replace with your own image in the public folder)</em>
+        </div>
+        <br>
+        <a href="#" class="privacy-link" id="privacyLink" aria-label="View privacy policy" tabindex="0">Privacy Policy</a>
+    </main>
+
+    <div class="modal" id="privacyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Privacy Policy</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Last updated:</strong> January 2, 2026</p>
+
+                <h3>Introduction</h3>
+                <p>Labour Lekka ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application.</p>
+
+                <h3>Information Collection</h3>
+                <p>Labour Lekka is designed to work completely offline. We do not collect, transmit, or store any personal information on external servers. All data you enter into the app remains stored locally on your device.</p>
+
+                <h3>Data Storage</h3>
+                <p>All information you input into Labour Lekka, including:</p>
+                <ul>
+                    <li>Labour records and attendance data</li>
+                    <li>Employee information</li>
+                    <li>Work schedules and timesheets</li>
+                    <li>Any other data entered by you</li>
+                </ul>
+                <p>is stored exclusively on your device. We have no access to this data, and it is never transmitted to our servers or any third parties.</p>
+
+                <h3>Third-Party Services</h3>
+                <p>Labour Lekka does not integrate with any third-party services, analytics platforms, or advertising networks. The app functions entirely offline and does not require an internet connection.</p>
+
+                <h3>Cookies and Tracking</h3>
+                <p>We do not use cookies, tracking technologies, or any form of analytics to monitor your usage of the app.</p>
+
+                <h3>Data Security</h3>
+                <p>Since all data is stored locally on your device, the security of your information depends on your device's security measures. We recommend:</p>
+                <ul>
+                    <li>Using a secure lock screen on your device</li>
+                    <li>Keeping your device's operating system updated</li>
+                    <li>Regularly backing up your device data</li>
+                </ul>
+
+                <h3>Children's Privacy</h3>
+                <p>Labour Lekka does not knowingly collect any information from children under the age of 13. The app is intended for business and professional use.</p>
+
+                <h3>Changes to This Privacy Policy</h3>
+                <p>We may update this Privacy Policy from time to time. Any changes will be reflected with an updated "Last updated" date at the top of this policy.</p>
+
+                <h3>Contact Us</h3>
+                <p>If you have any questions about this Privacy Policy, please contact us through the app's support channels.</p>
+
+                <h3>Your Rights</h3>
+                <p>Since all data is stored locally on your device, you have complete control over your information. You can:</p>
+                <ul>
+                    <li>Access all your data within the app</li>
+                    <li>Modify or delete any information at any time</li>
+                    <li>Uninstall the app to remove all associated data from your device</li>
+                </ul>
+
+                <h3>Consent</h3>
+                <p>By using Labour Lekka, you consent to this Privacy Policy and agree to its terms.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const privacyLink = document.getElementById('privacyLink');
+        const privacyModal = document.getElementById('privacyModal');
+        const closeModal = document.getElementById('closeModal');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const logoImg = document.getElementById('logoImg');
+        const logoFallback = document.getElementById('logoFallback');
+
+        window.setAppLogo = function(logoUrl) {
+            logoImg.src = logoUrl;
+            logoImg.style.display = 'block';
+            logoFallback.style.display = 'none';
+        };
+
+        setAppLogo('logo_lale.jpeg');
+
+        privacyLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            privacyModal.classList.add('active');
+        });
+
+        closeModal.addEventListener('click', function() {
+            privacyModal.classList.remove('active');
+        });
+
+        privacyModal.addEventListener('click', function(e) {
+            if (e.target === privacyModal) {
+                privacyModal.classList.remove('active');
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && privacyModal.classList.contains('active')) {
+                privacyModal.classList.remove('active');
+            }
+        });
+
+        downloadBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Download link will be available soon. Please check back later.');
+        });
+    </script>
+</body>
+</html>
