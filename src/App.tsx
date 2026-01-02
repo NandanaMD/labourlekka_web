@@ -37,6 +37,22 @@ function App() {
       </header>
 
       <main className="max-w-7xl mx-auto px-6 py-24">
+        {/* Beta Notice Banner */}
+        <div className="mb-12 mx-auto max-w-4xl">
+          <div className="bg-gradient-to-r from-yellow-400/10 to-orange-400/10 backdrop-blur-sm border border-yellow-400/30 rounded-lg p-5 text-center shadow-lg">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+              </svg>
+              <h3 className="text-lg font-semibold text-white">Beta Testing Phase</h3>
+            </div>
+            <p className="text-white/90 text-sm md:text-base leading-relaxed">
+              Labour Lekka is currently in closed beta testing. We're working hard to deliver a stable, reliable experience. 
+              <span className="block mt-2 font-medium text-yellow-300">Request access now to become an early tester and help us build the best labour management solution!</span>
+            </p>
+          </div>
+        </div>
+
         <section className="flex flex-col-reverse md:flex-row items-center gap-12">
           <div className="w-full md:w-1/2">
             <div className="bg-black/40 backdrop-blur-sm p-6 rounded-lg inline-block max-w-xl">
@@ -75,30 +91,33 @@ function App() {
                   <button onClick={async () => {
                     const el = document.getElementById('policy-content');
                     if (!el) return;
-                    // Temporarily ensure white background for clean capture
+                    // Temporarily ensure white background and add padding for clean capture
                     const prevBg = el.style.background;
+                    const prevPadding = el.style.padding;
                     el.style.background = '#ffffff';
+                    el.style.padding = '40px';
                     try {
                       const canvas = await html2canvas(el, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
                       const imgData = canvas.toDataURL('image/png');
                       const pdf = new jsPDF('p', 'pt', 'a4');
                       const pageWidth = pdf.internal.pageSize.getWidth();
                       const pageHeight = pdf.internal.pageSize.getHeight();
-                      const imgWidth = pageWidth;
+                      const margin = 30;
+                      const imgWidth = pageWidth - (2 * margin);
                       const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
                       let remainingHeight = imgHeight;
-                      let position = 0;
+                      let position = margin;
 
-                      // Add first page
-                      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                      remainingHeight -= pageHeight;
+                      // Add first page with margins
+                      pdf.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight);
+                      remainingHeight -= (pageHeight - margin);
 
                       // Add additional pages if needed by shifting the image upwards
                       while (remainingHeight > 0) {
                         position -= pageHeight;
                         pdf.addPage();
-                        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                        pdf.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight);
                         remainingHeight -= pageHeight;
                       }
 
@@ -108,6 +127,7 @@ function App() {
                       alert('Failed to export PDF. Please try again.');
                     } finally {
                       el.style.background = prevBg;
+                      el.style.padding = prevPadding;
                     }
                   }} className="px-3 py-1.5 bg-slate-700 text-white rounded text-sm hover:brightness-95">Export PDF</button>
                   <button onClick={() => setShowPolicy(false)} aria-label="Close privacy policy" className="px-3 py-1.5 bg-transparent text-slate-700 hover:text-slate-900 rounded">✕</button>
