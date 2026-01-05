@@ -1,27 +1,5 @@
 
-import { useState, useEffect, useRef } from "react";
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import rehypeRaw from 'rehype-raw';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
-
 function App() {
-  const [showPolicy, setShowPolicy] = useState(false);
-  const [policyText, setPolicyText] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!showPolicy) return;
-    // fetch the markdown file from public root
-    fetch('/PRIVACY_POLICY.md')
-      .then((r) => r.ok ? r.text() : Promise.reject('Failed to load'))
-      .then((txt) => setPolicyText(txt))
-      .catch(() => setPolicyText('# Privacy Policy\n\nUnable to load policy.'))
-    ;
-  }, [showPolicy]);
-
-  // We use `react-markdown` to render the policy Markdown safely and with GFM support.
-
   return (
     <div className="min-h-screen bg-fixed" style={{ backgroundImage: "linear-gradient(rgba(3,7,18,0.65), rgba(3,7,18,0.28)), url('bg-placeholder.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
       <header className="w-full py-6">
@@ -31,7 +9,7 @@ function App() {
             <span className="font-semibold text-lg text-white">Labour Lekka</span>
           </div>
           <div>
-            <a href="#" onClick={(e) => { e.preventDefault(); setShowPolicy(true); }} className="text-sm text-white/90 hover:underline">Privacy Policy</a>
+            <a href="/privacy-policy.html" target="_blank" rel="noopener noreferrer" className="text-sm text-white/90 hover:underline">Privacy Policy</a>
           </div>
         </nav>
       </header>
@@ -76,81 +54,6 @@ function App() {
           </div>
         </section>
       </main>
-
-      {showPolicy && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40" role="dialog" aria-modal="true">
-          <div className="max-w-3xl w-full mx-4 rounded-lg shadow-2xl overflow-auto max-h-[85vh]">
-            {/* translucent glass panel */}
-            <div className="bg-white/75 backdrop-blur-md border border-white/30 rounded-lg overflow-hidden">
-              <div className="p-4 md:p-6 flex items-start justify-between border-b border-white/30">
-                <div>
-                  <h2 className="text-xl font-semibold">Privacy Policy</h2>
-                  <div className="text-xs text-slate-700 mt-1">Effective: December 30, 2025 · Last updated: December 30, 2025</div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <button onClick={async () => {
-                    const el = document.getElementById('policy-content');
-                    if (!el) return;
-                    // Temporarily ensure white background and add padding for clean capture
-                    const prevBg = el.style.background;
-                    const prevPadding = el.style.padding;
-                    el.style.background = '#ffffff';
-                    el.style.padding = '40px';
-                    try {
-                      const canvas = await html2canvas(el, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
-                      const imgData = canvas.toDataURL('image/png');
-                      const pdf = new jsPDF('p', 'pt', 'a4');
-                      const pageWidth = pdf.internal.pageSize.getWidth();
-                      const pageHeight = pdf.internal.pageSize.getHeight();
-                      const margin = 30;
-                      const imgWidth = pageWidth - (2 * margin);
-                      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-                      let remainingHeight = imgHeight;
-                      let position = margin;
-
-                      // Add first page with margins
-                      pdf.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight);
-                      remainingHeight -= (pageHeight - margin);
-
-                      // Add additional pages if needed by shifting the image upwards
-                      while (remainingHeight > 0) {
-                        position -= pageHeight;
-                        pdf.addPage();
-                        pdf.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight);
-                        remainingHeight -= pageHeight;
-                      }
-
-                      pdf.save('Labour-Lekka-Privacy-Policy.pdf');
-                    } catch (err) {
-                      console.error('Export to PDF failed', err);
-                      alert('Failed to export PDF. Please try again.');
-                    } finally {
-                      el.style.background = prevBg;
-                      el.style.padding = prevPadding;
-                    }
-                  }} className="px-3 py-1.5 bg-slate-700 text-white rounded text-sm hover:brightness-95">Export PDF</button>
-                  <button onClick={() => setShowPolicy(false)} aria-label="Close privacy policy" className="px-3 py-1.5 bg-transparent text-slate-700 hover:text-slate-900 rounded">✕</button>
-                </div>
-              </div>
-
-              <div className="p-6 text-sm text-slate-800">
-                {policyText == null ? (
-                  <p>Loading...</p>
-                ) : (
-                  <div className="policy-markdown" id="policy-content">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{policyText}</ReactMarkdown>
-                  </div>
-                )}
-
-                <div className="mt-6 text-right">
-                  <button onClick={() => setShowPolicy(false)} className="px-4 py-2 bg-slate-900 text-white rounded">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
