@@ -1,5 +1,28 @@
+import { useState, useEffect } from 'react';
 
 function App() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const images = [
+    { src: '1000156381.png', alt: 'Labour Lekka App Screen 1' },
+    { src: '1000156670.png', alt: 'Labour Lekka App Screen 2' },
+    { src: 'Ad1.png', alt: 'Labour Lekka App Screen 3' }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % images.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
+  };
+
   return (
     <div className="min-h-screen bg-fixed" style={{ backgroundImage: "linear-gradient(rgba(3,7,18,0.65), rgba(3,7,18,0.28)), url('bg-placeholder.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
       <header className="w-full py-6">
@@ -15,22 +38,6 @@ function App() {
       </header>
 
       <main className="max-w-7xl mx-auto px-6 py-24">
-        {/* Beta Notice Banner */}
-        <div className="mb-12 mx-auto max-w-4xl">
-          <div className="bg-gradient-to-r from-yellow-400/10 to-orange-400/10 backdrop-blur-sm border border-yellow-400/30 rounded-lg p-5 text-center shadow-lg">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-              </svg>
-              <h3 className="text-lg font-semibold text-white">Beta Testing Phase</h3>
-            </div>
-            <p className="text-white/90 text-sm md:text-base leading-relaxed">
-              Labour Lekka is currently in closed beta testing. We're working hard to deliver a stable, reliable experience. 
-              <span className="block mt-2 font-medium text-yellow-300">Request access now to become an early tester and help us build the best labour management solution!</span>
-            </p>
-          </div>
-        </div>
-
         <section className="flex flex-col-reverse md:flex-row items-center gap-12">
           <div className="w-full md:w-1/2">
             <div className="bg-black/40 backdrop-blur-sm p-6 rounded-lg inline-block max-w-xl">
@@ -41,16 +48,62 @@ function App() {
                 <a href="https://play.google.com/store/apps/details?id=com.nmd.labourlekka" target="_blank" rel="noopener noreferrer" className="inline-block rounded-md shadow-lg overflow-hidden" aria-label="Download Labour Lekka on Google Play">
                   <img src="google-play-badge.svg" alt="Get it on Google Play" className="h-16 w-auto block" />
                 </a>
-
-                <a href="mailto:thisisnandanmd@gmail.com?subject=Request%20Access%20to%20Labour%20Lekka" className="ml-2 inline-flex items-center px-4 py-3 bg-yellow-400 text-black font-semibold rounded-md shadow hover:brightness-95">Request access</a>
               </div>
-
-              <p className="mt-3 text-xs text-white/80">(Closed test — selected users only)</p>
             </div>
           </div>
 
           <div className="w-full md:w-1/2 flex justify-center md:justify-end">
-            <img src="logo_lale.jpeg" alt="Labour Lekka decorative preview" className="w-64 h-64 md:w-[380px] md:h-[380px] object-contain rounded-lg shadow-2xl bg-transparent p-6 opacity-90 filter contrast-95" />
+            <div className="relative w-full max-w-md mx-auto">
+              {/* Image Slider */}
+              <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-gradient-to-br from-gray-900/30 to-gray-800/30 backdrop-blur-sm border border-white/10">
+                <div className="relative min-h-[400px] max-h-[650px] flex items-center justify-center p-4">
+                  {images.map((image, index) => (
+                    <img
+                      key={index}
+                      src={image.src}
+                      alt={image.alt}
+                      className={`absolute inset-0 w-full h-full object-contain p-4 transition-opacity duration-500 ${
+                        index === currentSlide ? 'opacity-100' : 'opacity-0'
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                {/* Navigation Arrows */}
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all"
+                  aria-label="Previous slide"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all"
+                  aria-label="Next slide"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+
+                {/* Dots Indicator */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                  {images.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentSlide(index)}
+                      className={`w-2 h-2 rounded-full transition-all ${
+                        index === currentSlide ? 'bg-white w-6' : 'bg-white/50'
+                      }`}
+                      aria-label={`Go to slide ${index + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>
