@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Deletion Guide - Labour Lekka</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+        }
+        h1 {
+            color: #2d3748;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #2d3748;
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .intro {
+            background: #e6f7ff;
+            border-left: 4px solid #1890ff;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+        .intro p {
+            margin: 0;
+            color: #1a5f7a;
+        }
+        .content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .method {
+            margin-bottom: 35px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+        }
+        .method h3 {
+            color: #16a34a;
+            font-size: 1.2em;
+            margin-bottom: 12px;
+        }
+        .steps {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        .steps li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+        .steps code {
+            background: #fff;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            color: #c7254e;
+            border: 1px solid #e2e8f0;
+        }
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px 16px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .warning p {
+            margin: 0;
+            color: #856404;
+            font-size: 0.95em;
+        }
+        .note {
+            background: #f0f9ff;
+            border-left: 4px solid #0ea5e9;
+            padding: 12px 16px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .note p {
+            margin: 0;
+            color: #075985;
+            font-size: 0.95em;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+        footer a {
+            color: #16a34a;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo_lale.png" alt="Labour Lekka" onerror="this.style.display='none'">
+            <div>
+                <h1>Data Deletion Guide</h1>
+                <p style="color: #666; font-size: 0.95em;">Labour Lekka</p>
+            </div>
+        </header>
+
+        <div class="intro">
+            <p><strong>You have full control of your data.</strong> Labour Lekka is a privacy-first, offline app. All your data is stored locally on your device. We do not collect, access, or share any of your information with third parties or for advertising purposes.</p>
+        </div>
+
+        <div class="content">
+            <h2>How Your Data is Stored</h2>
+            <p>Labour Lekka stores all your worker information, attendance records, and payment data <strong>locally on your device</strong>. The app works completely offline and does not require an account.</p>
+            <p style="margin-top: 10px;">The <em>only optional feature</em> that connects online is <strong>Google Drive Backup</strong>, which stores a copy of your data in <strong>your own Google Drive</strong> — not on our servers. This is entirely optional and controlled by you.</p>
+
+            <h2>How to Delete Your Data</h2>
+            <p style="margin-bottom: 25px;">You can delete your data at any time using any of the following methods:</p>
+
+            <div class="method">
+                <h3>Method 1: Sign Out from Google Drive (Cloud Backup)</h3>
+                <p>If you've linked your Google Drive for backup, you can disconnect it anytime:</p>
+                <ol class="steps">
+                    <li>Open the Labour Lekka app</li>
+                    <li>Go to <code>Settings</code></li>
+                    <li>Select <code>Cloud Backup</code></li>
+                    <li>Tap <code>Sign Out</code></li>
+                </ol>
+                <div class="note">
+                    <p><strong>Note:</strong> This only disconnects the Google Drive sync. Your local data on the device remains intact. To delete local data, use Method 2.</p>
+                </div>
+            </div>
+
+            <div class="method">
+                <h3>Method 2: Reset App (Delete All Local Data)</h3>
+                <p>To permanently delete all worker records, attendance, and payment data from your device:</p>
+                <ol class="steps">
+                    <li>Open the Labour Lekka app</li>
+                    <li>Go to <code>Settings</code></li>
+                    <li>Scroll to <code>DANGER ZONE</code></li>
+                    <li>Tap <code>Reset App</code></li>
+                    <li>Confirm the action</li>
+                </ol>
+                <div class="warning">
+                    <p><strong>⚠️ Warning:</strong> This will permanently erase all data from your device. Make sure you have a backup if you need to keep any records.</p>
+                </div>
+            </div>
+
+            <div class="method">
+                <h3>Method 3: Delete Backup Files from Google Drive</h3>
+                <p>If you've enabled Google Drive backup, you can manually delete the backed-up files:</p>
+                <ol class="steps">
+                    <li>Open <strong>Google Drive</strong> (via web or mobile app)</li>
+                    <li>Navigate to the folder where Labour Lekka stores backups</li>
+                    <li>Select the backup files</li>
+                    <li>Delete them permanently</li>
+                </ol>
+                <div class="note">
+                    <p><strong>Note:</strong> Since the data is stored in <em>your</em> Google Drive, you have complete access and control. We cannot access or delete these files — only you can.</p>
+                </div>
+            </div>
+
+            <div class="method">
+                <h3>Method 4: Unlink App from Google Account</h3>
+                <p>To revoke Labour Lekka's access to your Google account:</p>
+                <ol class="steps">
+                    <li>Go to your <a href="https://myaccount.google.com/permissions" target="_blank" style="color: #16a34a;">Google Account Permissions</a></li>
+                    <li>Find <strong>Labour Lekka</strong> in the list</li>
+                    <li>Click <strong>Remove Access</strong></li>
+                </ol>
+                <div class="note">
+                    <p><strong>Note:</strong> This prevents the app from syncing with your Google Drive in the future, but does not delete existing files in your Drive. You'll need to manually delete those (see Method 3).</p>
+                </div>
+            </div>
+
+            <div class="method">
+                <h3>Method 5: Uninstall the App</h3>
+                <p>Simply uninstalling Labour Lekka from your device will remove all local data:</p>
+                <ol class="steps">
+                    <li>Long-press the Labour Lekka app icon</li>
+                    <li>Select <strong>Uninstall</strong></li>
+                    <li>Confirm</li>
+                </ol>
+                <div class="note">
+                    <p><strong>Note:</strong> If you had Google Drive backup enabled, the backup files will remain in your Google Drive. You can delete them manually using Method 3 if desired.</p>
+                </div>
+            </div>
+
+            <h2>Complete Data Deletion Checklist</h2>
+            <p>To ensure all your data is completely removed:</p>
+            <ol class="steps">
+                <li>Sign out from Google Drive (if connected)</li>
+                <li>Reset the app from Settings → DANGER ZONE</li>
+                <li>Delete backup files from your Google Drive (if any)</li>
+                <li>Unlink Labour Lekka from your Google Account permissions</li>
+                <li>Uninstall the app from your device</li>
+            </ol>
+
+            <h2>Need Help?</h2>
+            <p>If you need assistance with data deletion or have any questions, feel free to contact us at <a href="mailto:labourlekka@gmail.com" style="color: #16a34a;">labourlekka@gmail.com</a></p>
+        </div>
+
+        <footer>
+            <p><a href="/">← Back to Home</a> | <a href="/privacy-policy.html">Privacy Policy</a></p>
+            <p style="margin-top: 10px;">&copy; 2026 Labour Lekka. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
