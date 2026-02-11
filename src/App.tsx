@@ -1,12 +1,26 @@
 import { useState, useEffect } from 'react';
+import TeamPage from './TeamPage';
 
 function App() {
+  const [currentPage, setCurrentPage] = useState('home');
   const [currentSlide, setCurrentSlide] = useState(0);
   const images = [
     { src: '1000156381.png', alt: 'Labour Lekka App Screen 1' },
     { src: '1000156670.png', alt: 'Labour Lekka App Screen 2' },
     { src: 'Ad1.png', alt: 'Labour Lekka App Screen 3' }
   ];
+
+  // Handle hash-based navigation
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1);
+      setCurrentPage(hash || 'home');
+    };
+
+    handleHashChange(); // Check initial hash
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -23,16 +37,23 @@ function App() {
     setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
   };
 
+  // Render team page if on team route
+  if (currentPage === 'team') {
+    return <TeamPage />;
+  }
+
+  // Otherwise render home page
   return (
-    <div className="min-h-screen bg-fixed" style={{ backgroundImage: "linear-gradient(rgba(3,7,18,0.65), rgba(3,7,18,0.28)), url('bg-placeholder.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+    <div className="min-h-screen md:bg-fixed" style={{ backgroundImage: "linear-gradient(rgba(3,7,18,0.65), rgba(3,7,18,0.28)), url('bg-placeholder.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
       <header className="w-full py-6">
         <nav className="max-w-6xl mx-auto px-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img src="logo_lale.png" alt="Labour Lekka logo" className="h-10 w-10 object-contain rounded-md" />
             <span className="font-semibold text-lg text-white">Labour Lekka</span>
           </div>
-          <div>
-            <a href="/privacy-policy.html" target="_blank" rel="noopener noreferrer" className="text-sm text-white/90 hover:underline">Privacy Policy</a>
+          <div className="flex items-center gap-6">
+            <a href="#team" className="text-sm text-white/90 hover:text-white hover:underline transition-colors">Our Team</a>
+            <a href="/privacy-policy.html" target="_blank" rel="noopener noreferrer" className="text-sm text-white/90 hover:text-white hover:underline transition-colors">Privacy Policy</a>
           </div>
         </nav>
       </header>
@@ -303,6 +324,7 @@ function App() {
             <div>
               <h3 className="text-white font-semibold mb-4">Quick Links</h3>
               <ul className="space-y-2">
+                <li><a href="#team" className="text-white/70 hover:text-white text-sm transition-colors">Our Team</a></li>
                 <li><a href="/privacy-policy.html" target="_blank" className="text-white/70 hover:text-white text-sm transition-colors">Privacy Policy</a></li>
                 <li><a href="/data-deletion.html" target="_blank" className="text-white/70 hover:text-white text-sm transition-colors">Data Deletion Guide</a></li>
                 <li><a href="https://play.google.com/store/apps/details?id=com.nmd.labourlekka" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white text-sm transition-colors">Download App</a></li>
