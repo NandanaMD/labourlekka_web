@@ -45,6 +45,13 @@ const contributors: Contributor[] = [
     initials: 'SM'
   },
   {
+    name: 'Vinay G Hegade',
+    role: 'Marketing & Community Outreach',
+    description: 'Drives awareness and adoption by building relationships with households, workers, and local communities. He helps communicate Labour Lekka\'s value clearly, gathers on-ground feedback, and supports outreach initiatives that turn interest into long-term trust.',
+    image: '/team/vinay.jpeg',
+    initials: 'VH'
+  },
+  {
         name: 'Sanath Udupa',
     role: 'Product Feedback & Testing',
     description: 'Played a vital role in refining the product through honest feedback and thorough testing. His suggestions and attention to detail continue to strengthen the platform\'s stability and usability.',
