@@ -81,7 +81,7 @@ function PrivacyPolicy({ onClose }: PrivacyPolicyProps) {
           </button>
 
           <div className="flex items-center gap-3">
-            <img src="logo_lale.jpeg" alt="Labour Lekka" className="h-8 w-8 object-contain rounded-md" />
+            <img src="logo.png" alt="Labour Lekka" className="h-8 w-8 object-contain rounded-md" />
             <span className="font-semibold text-slate-900">Labour Lekka</span>
           </div>
 

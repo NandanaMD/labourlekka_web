@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply font-outfit bg-[#FCF3E3] text-[#2B3E34] antialiased;
+  }
+}
+
 /* Styles for the privacy policy modal content */
 .policy-markdown {
   color: #1e293b;
