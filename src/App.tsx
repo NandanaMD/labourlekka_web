@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
-import { 
-  Download, 
-  Calendar, 
-  DollarSign, 
-  WifiOff, 
-  ChevronLeft, 
-  ChevronRight, 
-  ChevronDown, 
-  Mail, 
-  FileText, 
+import {
+  Download,
+  Calendar,
+  DollarSign,
+  WifiOff,
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
+  Mail,
+  FileText,
   CheckCircle,
   HelpCircle,
   Users,
@@ -18,14 +18,16 @@ import {
 } from 'lucide-react';
 import TeamPage from './TeamPage';
 
+const images = [
+  { src: 'post1.png', alt: 'Labour Lekka App Screen 1' },
+  { src: 'post2.png', alt: 'Labour Lekka App Screen 2' },
+  { src: 'post3.png', alt: 'Labour Lekka App Screen 3' }
+];
+
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [currentSlide, setCurrentSlide] = useState(0);
-  const images = [
-    { src: 'post1.png', alt: 'Labour Lekka App Screen 1' },
-    { src: 'post2.png', alt: 'Labour Lekka App Screen 2' },
-    { src: 'post3.png', alt: 'Labour Lekka App Screen 3' }
-  ];
+
 
   // Handle hash-based navigation
   useEffect(() => {
@@ -87,7 +89,7 @@ function App() {
 
       {/* Main Container */}
       <main className="max-w-6xl mx-auto px-6 relative z-10">
-        
+
         {/* Hero Section */}
         <section className="flex flex-col-reverse md:flex-row items-center gap-16 py-20 md:py-28">
           {/* Hero Content */}
@@ -96,22 +98,22 @@ function App() {
               <span className="w-2 h-2 rounded-full bg-[#708C69] animate-pulse" />
               100% Offline-First App
             </div>
-            
+
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#2B3E34] mb-6 leading-[1.15]">
               Manage labour, <br />
               <span className="text-[#708C69]">even offline.</span>
             </h1>
-            
+
             <p className="text-lg text-[#5E7757] mb-8 max-w-xl leading-relaxed">
               Labour Lekka helps households, daily wage environments, and small contractors manage workers, track attendance, and record payments reliably — without needing internet access.
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
-              <a 
-                href="https://play.google.com/store/apps/details?id=com.nmd.labourlekka" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="inline-flex items-center justify-center gap-3 bg-[#708C69] hover:bg-[#5E7757] active:bg-[#2B3E34] text-white font-bold px-8 py-4 rounded-xl transition-all shadow-[0_4px_16px_rgba(112,140,105,0.25)] hover:shadow-[0_4px_20px_rgba(112,140,105,0.4)] hover:-translate-y-0.5 text-center" 
+              <a
+                href="https://play.google.com/store/apps/details?id=com.nmd.labourlekka"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-3 bg-[#708C69] hover:bg-[#5E7757] active:bg-[#2B3E34] text-white font-bold px-8 py-4 rounded-xl transition-all shadow-[0_4px_16px_rgba(112,140,105,0.25)] hover:shadow-[0_4px_20px_rgba(112,140,105,0.4)] hover:-translate-y-0.5 text-center"
                 aria-label="Download Labour Lekka on Google Play"
               >
                 <Download className="w-5 h-5" />
@@ -123,7 +125,7 @@ function App() {
           {/* Hero Slider with Square Flyer Frame */}
           <div className="w-full md:w-1/2 flex justify-center md:justify-end">
             <div className="relative w-full max-w-[400px] aspect-square bg-white border border-[#ced8b2] rounded-2xl shadow-[0_15px_40px_-10px_rgba(43,62,52,0.15)] overflow-hidden group">
-              
+
               {/* Ad Post Slider */}
               <div className="w-full h-full relative bg-white">
                 {images.map((image, index) => (
@@ -131,9 +133,8 @@ function App() {
                     key={index}
                     src={image.src}
                     alt={image.alt}
-                    className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
-                      index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
-                    }`}
+                    className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+                      }`}
                   />
                 ))}
               </div>
@@ -160,9 +161,8 @@ function App() {
                   <button
                     key={index}
                     onClick={() => setCurrentSlide(index)}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      index === currentSlide ? 'bg-[#708C69] w-4' : 'bg-[#ced8b2]'
-                    }`}
+                    className={`w-2 h-2 rounded-full transition-all ${index === currentSlide ? 'bg-[#708C69] w-4' : 'bg-[#ced8b2]'
+                      }`}
                     aria-label={`Go to slide ${index + 1}`}
                   />
                 ))}
@@ -177,7 +177,7 @@ function App() {
             <h2 className="text-3xl md:text-4xl font-bold text-[#2B3E34] mb-4">Key Features</h2>
             <p className="text-[#5E7757] text-lg max-w-2xl mx-auto">Everything you need to manage workers and helpers efficiently, offline-first.</p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {/* Feature 1 */}
             <div className="bg-white border border-[#ced8b2] hover:border-[#708C69] p-8 rounded-2xl transition-all hover:-translate-y-1 hover:shadow-lg shadow-sm">
@@ -187,7 +187,7 @@ function App() {
               <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Track Attendance</h3>
               <p className="text-[#5E7757] leading-relaxed">Mark worker attendance daily with quick toggle options, time tags, and complete historical logs.</p>
             </div>
-            
+
             {/* Feature 2 */}
             <div className="bg-white border border-[#ced8b2] hover:border-[#708C69] p-8 rounded-2xl transition-all hover:-translate-y-1 hover:shadow-lg shadow-sm">
               <div className="w-12 h-12 rounded-xl bg-[#FCF3E3] text-[#2B3E34] flex items-center justify-center mb-6 border border-[#ced8b2]/50">
@@ -196,7 +196,7 @@ function App() {
               <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Manage Payments</h3>
               <p className="text-[#5E7757] leading-relaxed">Record wages, advance payments, and calculate final balances automatically for easy settlements.</p>
             </div>
-            
+
             {/* Feature 3 */}
             <div className="bg-white border border-[#ced8b2] hover:border-[#708C69] p-8 rounded-2xl transition-all hover:-translate-y-1 hover:shadow-lg shadow-sm">
               <div className="w-12 h-12 rounded-xl bg-[#FCF3E3] text-[#2B3E34] flex items-center justify-center mb-6 border border-[#ced8b2]/50">
@@ -212,13 +212,13 @@ function App() {
         <section className="py-20 border-t border-[#ced8b2]/50">
           <div className="bg-[#2B3E34] text-[#FCF3E3] border border-[#2B3E34] p-8 md:p-12 rounded-3xl relative overflow-hidden shadow-xl">
             <div className="absolute top-0 right-0 w-96 h-96 bg-[#708C69]/10 rounded-full blur-3xl pointer-events-none z-0" />
-            
+
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center">Built for Households, Rural Areas & Businesses</h2>
               <p className="text-[#FCF3E3]/80 text-lg text-center mb-12 max-w-3xl mx-auto leading-relaxed">
                 Labour Lekka is designed for communities who need clean worker management. Whether you're a household managing domestic helpers, a farmer managing daily workers, or a contractor — this app is for you.
               </p>
-              
+
               <div className="grid md:grid-cols-3 gap-6 text-center">
                 <div className="bg-[#2B3E34]/50 border border-[#708C69]/30 p-6 rounded-2xl hover:border-[#708C69]/60 transition-colors flex flex-col items-center">
                   <div className="w-12 h-12 rounded-full bg-[#708C69]/20 border border-[#708C69]/40 text-[#708C69] flex items-center justify-center mb-4">
@@ -252,24 +252,24 @@ function App() {
             <h2 className="text-3xl md:text-4xl font-bold text-[#2B3E34] mb-4">How It Works</h2>
             <p className="text-[#5E7757] text-lg">Three simple steps to start managing</p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-10">
             <div className="relative bg-white border border-[#ced8b2] hover:border-[#708C69] p-8 rounded-2xl text-center shadow-sm pt-12 transition-all">
               <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-[#708C69] border-4 border-[#FCF3E3] text-white font-extrabold text-lg flex items-center justify-center">1</div>
               <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Download & Setup</h3>
               <p className="text-[#5E7757] leading-relaxed">Install the app from Google Play Store and add your workers in under a minute.</p>
             </div>
-            
+
             <div className="relative bg-white border border-[#ced8b2] hover:border-[#708C69] p-8 rounded-2xl text-center shadow-sm pt-12 transition-all">
               <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-[#708C69] border-4 border-[#FCF3E3] text-white font-extrabold text-lg flex items-center justify-center">2</div>
               <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Track Daily</h3>
               <p className="text-[#5E7757] leading-relaxed">Mark daily attendance, note work durations, and log advances or adjustments as they happen.</p>
             </div>
-            
+
             <div className="relative bg-white border border-[#ced8b2] hover:border-[#708C69] p-8 rounded-2xl text-center shadow-sm pt-12 transition-all">
               <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-[#708C69] border-4 border-[#FCF3E3] text-white font-extrabold text-lg flex items-center justify-center">3</div>
               <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Settle Payments</h3>
-              <p className="text-[#5E7757] leading-relaxed">Calculate final dues automatically and maintain an error-free, verifiable log of payment history.</p>
+              <p className="text-[#5E7757] leading-relaxed">Automatically calculate final dues and maintain a clear, error-free payment record..<br></br> <span className="font-bold">Note: Labour lekka does not support any kind of payment system</span></p>
             </div>
           </div>
         </section>
@@ -278,20 +278,20 @@ function App() {
         <section className="py-20 border-t border-[#ced8b2]/50">
           <div className="bg-[#708C69]/10 border-2 border-[#708C69]/20 p-10 md:p-12 rounded-3xl text-center max-w-2xl mx-auto shadow-sm relative overflow-hidden">
             <div className="absolute -top-12 -right-12 w-28 h-28 bg-[#708C69]/10 rounded-full blur-2xl pointer-events-none" />
-            
+
             <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#708C69]/20 border border-[#708C69]/30 text-[#2B3E34] text-xs font-bold mb-6">
               <CheckCircle className="w-3.5 h-3.5 text-[#2B3E34]" />
               100% Free App
             </div>
-            
+
             <h2 className="text-3xl md:text-5xl font-extrabold text-[#2B3E34] mb-4">Free Forever.</h2>
             <p className="text-[#5E7757] text-lg mb-8 leading-relaxed">
               No subscriptions. No locked features. No hidden charges. All functions completely free to support households, farmers, and small businesses.
             </p>
-            <a 
-              href="https://play.google.com/store/apps/details?id=com.nmd.labourlekka" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://play.google.com/store/apps/details?id=com.nmd.labourlekka"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#2B3E34] hover:bg-[#1f2e26] text-white font-bold py-4 px-8 rounded-xl transition-all shadow-[0_4px_16px_rgba(43,62,48,0.2)] hover:scale-[1.02]"
             >
               Get Labour Lekka Now
@@ -305,7 +305,7 @@ function App() {
             <h2 className="text-3xl md:text-4xl font-bold text-[#2B3E34] mb-4">Frequently Asked Questions</h2>
             <p className="text-[#5E7757] text-lg">Clear answers to common questions about Labour Lekka</p>
           </div>
-          
+
           <div className="max-w-3xl mx-auto space-y-4">
             {/* FAQ 1 */}
             <details className="bg-white border border-[#ced8b2] hover:border-[#708C69] p-6 rounded-2xl group [&_summary::-webkit-details-marker]:hidden transition-all shadow-sm">
@@ -320,7 +320,7 @@ function App() {
                 Yes! Labour Lekka works 100% offline. You can mark attendance, manage payments, and view worker history without any internet connection. If you enable Google Drive cloud storage permission, your data will sync to your own Google Drive storage when you are back online.
               </p>
             </details>
-            
+
             {/* FAQ 2 */}
             <details className="bg-white border border-[#ced8b2] hover:border-[#708C69] p-6 rounded-2xl group [&_summary::-webkit-details-marker]:hidden transition-all shadow-sm">
               <summary className="text-[#2B3E34] font-bold cursor-pointer list-none flex justify-between items-center text-lg">
@@ -334,7 +334,7 @@ function App() {
                 No limits! Add as many workers as you need. Whether you manage 5 domestic helpers or 500 construction labourers, Labour Lekka handles it all with ease.
               </p>
             </details>
-            
+
             {/* FAQ 3 */}
             <details className="bg-white border border-[#ced8b2] hover:border-[#708C69] p-6 rounded-2xl group [&_summary::-webkit-details-marker]:hidden transition-all shadow-sm">
               <summary className="text-[#2B3E34] font-bold cursor-pointer list-none flex justify-between items-center text-lg">
@@ -348,7 +348,7 @@ function App() {
                 Yes! By connecting your Google Account and enabling Google Drive backup permission, your data will sync seamlessly across multiple devices using your own private storage.
               </p>
             </details>
-            
+
             {/* FAQ 4 */}
             <details className="bg-white border border-[#ced8b2] hover:border-[#708C69] p-6 rounded-2xl group [&_summary::-webkit-details-marker]:hidden transition-all shadow-sm">
               <summary className="text-[#2B3E34] font-bold cursor-pointer list-none flex justify-between items-center text-lg">
@@ -362,7 +362,7 @@ function App() {
                 Absolutely. Your data is stored locally on your device. If backup is enabled, it is stored securely in your own private Google Drive — not on our servers. We never collect, see, or share your worker information.
               </p>
             </details>
-            
+
             {/* FAQ 5 */}
             <details className="bg-white border border-[#ced8b2] hover:border-[#708C69] p-6 rounded-2xl group [&_summary::-webkit-details-marker]:hidden transition-all shadow-sm">
               <summary className="text-[#2B3E34] font-bold cursor-pointer list-none flex justify-between items-center text-lg">
@@ -393,7 +393,7 @@ function App() {
                 Effortless worker management for households, rural areas, and small businesses. Works offline, completely free.
               </p>
             </div>
-            
+
             <div>
               <h3 className="text-white font-bold mb-4 text-base tracking-wider uppercase">Quick Links</h3>
               <ul className="space-y-3">
@@ -403,7 +403,7 @@ function App() {
                 <li><a href="https://play.google.com/store/apps/details?id=com.nmd.labourlekka" target="_blank" rel="noopener noreferrer" className="text-[#FCF3E3]/70 hover:text-white text-sm transition-colors">Download App</a></li>
               </ul>
             </div>
-            
+
             <div>
               <h3 className="text-white font-bold mb-4 text-base tracking-wider uppercase">Contact Us</h3>
               <a href="mailto:labourlekka@gmail.com" className="text-[#FCF3E3]/70 hover:text-white text-sm transition-colors inline-flex items-center gap-2">
@@ -412,7 +412,7 @@ function App() {
               </a>
             </div>
           </div>
-          
+
           <div className="border-t border-[#1f2e26] pt-8 text-center">
             <p className="text-[#FCF3E3]/55 text-sm">&copy; {new Date().getFullYear()} Labour Lekka. All rights reserved.</p>
           </div>
