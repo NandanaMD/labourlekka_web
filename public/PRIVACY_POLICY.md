@@ -15,7 +15,7 @@ By installing or using the App, you acknowledge that you have read, understood, 
 
 # Nature of the Application
 
-Labour Lekka is a local-first, primarily offline mobile application designed to help contractors, builders, and businesses manage labour attendance, wages, advances, and related records.
+Labour Lekka is a local-first, primarily offline mobile application designed to help farmers, agricultural contractors, estates, and daily wage employers manage labour attendance (Hajari), wages, advances, and related ledger records.
 
 - The App does not require an internet connection for its core functionality.
 - All labour records are stored locally on your device by default.
@@ -52,7 +52,7 @@ The App stores only the information that you voluntarily enter. This may include
 - Attendance records
 - Wage details
 - Advance payment records
-- Contractor information
+- Farmer / Contractor / Employer information
 - Work categories
 - Generated reports
 - Backup files

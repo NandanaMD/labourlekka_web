@@ -12,7 +12,6 @@ import {
   CheckCircle,
   HelpCircle,
   Users,
-  Home,
   Sprout,
   Briefcase
 } from 'lucide-react';
@@ -100,12 +99,12 @@ function App() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#2B3E34] mb-6 leading-[1.15]">
-              Manage labour, <br />
+              Track farm labour, <br />
               <span className="text-[#708C69]">even offline.</span>
             </h1>
 
             <p className="text-lg text-[#5E7757] mb-8 max-w-xl leading-relaxed">
-              Labour Lekka helps households, daily wage environments, and small contractors manage workers, track attendance, and record payments reliably — without needing internet access.
+              Labour Lekka helps farmers, agricultural contractors, and estate owners manage worker attendance (<i>Hajari</i>) and wage advances (<i>Hisab-Kitab</i>) reliably—without needing internet access.
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
@@ -117,7 +116,7 @@ function App() {
                 aria-label="Download Labour Lekka on Google Play"
               >
                 <Download className="w-5 h-5" />
-                Get on Google Play
+                Download Free App (Android)
               </a>
             </div>
           </div>
@@ -175,7 +174,7 @@ function App() {
         <section className="py-20 border-t border-[#ced8b2]/50">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#2B3E34] mb-4">Key Features</h2>
-            <p className="text-[#5E7757] text-lg max-w-2xl mx-auto">Everything you need to manage workers and helpers efficiently, offline-first.</p>
+            <p className="text-[#5E7757] text-lg max-w-2xl mx-auto">Everything you need to track farm workers and cash advances efficiently, offline-first.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -184,8 +183,8 @@ function App() {
               <div className="w-12 h-12 rounded-xl bg-[#FCF3E3] text-[#2B3E34] flex items-center justify-center mb-6 border border-[#ced8b2]/50">
                 <Calendar className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Track Attendance</h3>
-              <p className="text-[#5E7757] leading-relaxed">Mark worker attendance daily with quick toggle options, time tags, and complete historical logs.</p>
+              <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Daily Hajari (Attendance)</h3>
+              <p className="text-[#5E7757] leading-relaxed">Mark daily worker attendance with simple checkmarks, tracking half-days, full-days, or specific shifts easily.</p>
             </div>
 
             {/* Feature 2 */}
@@ -193,8 +192,8 @@ function App() {
               <div className="w-12 h-12 rounded-xl bg-[#FCF3E3] text-[#2B3E34] flex items-center justify-center mb-6 border border-[#ced8b2]/50">
                 <DollarSign className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Manage Payments</h3>
-              <p className="text-[#5E7757] leading-relaxed">Record wages, advance payments, and calculate final balances automatically for easy settlements.</p>
+              <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Track Advances & Wages</h3>
+              <p className="text-[#5E7757] leading-relaxed">Record daily wages, cash advances, and deductions (meals/transport) to auto-calculate the final balance.</p>
             </div>
 
             {/* Feature 3 */}
@@ -202,8 +201,8 @@ function App() {
               <div className="w-12 h-12 rounded-xl bg-[#FCF3E3] text-[#2B3E34] flex items-center justify-center mb-6 border border-[#ced8b2]/50">
                 <WifiOff className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Works Offline</h3>
-              <p className="text-[#5E7757] leading-relaxed">No internet connection required. All details are stored locally on your device, private and secure.</p>
+              <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Works 100% Offline</h3>
+              <p className="text-[#5E7757] leading-relaxed">No internet connection required. Keep all worker and payment records securely on your own device.</p>
             </div>
           </div>
         </section>
@@ -214,32 +213,32 @@ function App() {
             <div className="absolute top-0 right-0 w-96 h-96 bg-[#708C69]/10 rounded-full blur-3xl pointer-events-none z-0" />
 
             <div className="relative z-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center">Built for Households, Rural Areas & Businesses</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center">Built for Farms, Contractors & Estates</h2>
               <p className="text-[#FCF3E3]/80 text-lg text-center mb-12 max-w-3xl mx-auto leading-relaxed">
-                Labour Lekka is designed for communities who need clean worker management. Whether you're a household managing domestic helpers, a farmer managing daily workers, or a contractor — this app is for you.
+                Labour Lekka replaces the traditional paper diary (<i>Lekka Pustaka</i>) with a secure, digital wage book. Whether you manage a small family farm, a large coffee plantation, or moving harvesting crews, this app is built for you.
               </p>
 
               <div className="grid md:grid-cols-3 gap-6 text-center">
                 <div className="bg-[#2B3E34]/50 border border-[#708C69]/30 p-6 rounded-2xl hover:border-[#708C69]/60 transition-colors flex flex-col items-center">
                   <div className="w-12 h-12 rounded-full bg-[#708C69]/20 border border-[#708C69]/40 text-[#708C69] flex items-center justify-center mb-4">
-                    <Home className="w-6 h-6" />
+                    <Sprout className="w-6 h-6" />
                   </div>
-                  <h3 className="text-white font-bold text-lg mb-1">Households</h3>
-                  <p className="text-[#FCF3E3]/70 text-sm">Domestic helpers, cooks, drivers</p>
+                  <h3 className="text-white font-bold text-lg mb-1">Farms & Plantations</h3>
+                  <p className="text-[#FCF3E3]/70 text-sm">Coffee, Tea, Arecanut, Rubber, Coconut</p>
                 </div>
                 <div className="bg-[#2B3E34]/50 border border-[#708C69]/30 p-6 rounded-2xl hover:border-[#708C69]/60 transition-colors flex flex-col items-center">
                   <div className="w-12 h-12 rounded-full bg-[#708C69]/20 border border-[#708C69]/40 text-[#708C69] flex items-center justify-center mb-4">
-                    <Sprout className="w-6 h-6" />
+                    <Users className="w-6 h-6" />
                   </div>
-                  <h3 className="text-white font-bold text-lg mb-1">Rural Areas</h3>
-                  <p className="text-[#FCF3E3]/70 text-sm">Farm workers, daily wage laborers</p>
+                  <h3 className="text-white font-bold text-lg mb-1">Labour Contractors</h3>
+                  <p className="text-[#FCF3E3]/70 text-sm">Harvesting teams, weeding & pruning crews</p>
                 </div>
                 <div className="bg-[#2B3E34]/50 border border-[#708C69]/30 p-6 rounded-2xl hover:border-[#708C69]/60 transition-colors flex flex-col items-center">
                   <div className="w-12 h-12 rounded-full bg-[#708C69]/20 border border-[#708C69]/40 text-[#708C69] flex items-center justify-center mb-4">
                     <Briefcase className="w-6 h-6" />
                   </div>
-                  <h3 className="text-white font-bold text-lg mb-1">Small Businesses</h3>
-                  <p className="text-[#FCF3E3]/70 text-sm">Contractors, workshop owners</p>
+                  <h3 className="text-white font-bold text-lg mb-1">Rural Workspaces</h3>
+                  <p className="text-[#FCF3E3]/70 text-sm">Brick kilns, plant nurseries, local construction</p>
                 </div>
               </div>
             </div>
@@ -250,26 +249,26 @@ function App() {
         <section className="py-20 border-t border-[#ced8b2]/50">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#2B3E34] mb-4">How It Works</h2>
-            <p className="text-[#5E7757] text-lg">Three simple steps to start managing</p>
+            <p className="text-[#5E7757] text-lg">Three simple steps to manage your crew</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-10">
             <div className="relative bg-white border border-[#ced8b2] hover:border-[#708C69] p-8 rounded-2xl text-center shadow-sm pt-12 transition-all">
               <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-[#708C69] border-4 border-[#FCF3E3] text-white font-extrabold text-lg flex items-center justify-center">1</div>
-              <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Download & Setup</h3>
-              <p className="text-[#5E7757] leading-relaxed">Install the app from Google Play Store and add your workers in under a minute.</p>
+              <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Add Your Crew</h3>
+              <p className="text-[#5E7757] leading-relaxed">Download the app, register your worker names, and set their daily wage rate or task rate in seconds.</p>
             </div>
 
             <div className="relative bg-white border border-[#ced8b2] hover:border-[#708C69] p-8 rounded-2xl text-center shadow-sm pt-12 transition-all">
               <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-[#708C69] border-4 border-[#FCF3E3] text-white font-extrabold text-lg flex items-center justify-center">2</div>
-              <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Track Daily</h3>
-              <p className="text-[#5E7757] leading-relaxed">Mark daily attendance, note work durations, and log advances or adjustments as they happen.</p>
+              <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Mark Hajari & Advances</h3>
+              <p className="text-[#5E7757] leading-relaxed">Log daily attendance and record cash advances given for groceries, travel, or medical needs right in the field.</p>
             </div>
 
             <div className="relative bg-white border border-[#ced8b2] hover:border-[#708C69] p-8 rounded-2xl text-center shadow-sm pt-12 transition-all">
               <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-[#708C69] border-4 border-[#FCF3E3] text-white font-extrabold text-lg flex items-center justify-center">3</div>
-              <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Settle Payments</h3>
-              <p className="text-[#5E7757] leading-relaxed">Automatically calculate final dues and maintain a clear, error-free payment record..<br></br> <span className="font-bold">Note: Labour lekka does not support any kind of payment system</span></p>
+              <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Settle Accounts</h3>
+              <p className="text-[#5E7757] leading-relaxed">Automatically calculate final dues for error-free payouts. Export PDF or Excel ledger sheets to share with workers.<br></br> <span className="font-bold">Note: Labour Lekka is a ledger and does not process payments or money transfers.</span></p>
             </div>
           </div>
         </section>
@@ -286,7 +285,7 @@ function App() {
 
             <h2 className="text-3xl md:text-5xl font-extrabold text-[#2B3E34] mb-4">Free Forever.</h2>
             <p className="text-[#5E7757] text-lg mb-8 leading-relaxed">
-              No subscriptions. No locked features. No hidden charges. All functions completely free to support households, farmers, and small businesses.
+              No subscriptions. No locked features. No hidden charges. All functions completely free to support farmers, agricultural contractors, and rural daily wage employers.
             </p>
             <a
               href="https://play.google.com/store/apps/details?id=com.nmd.labourlekka"
@@ -312,12 +311,12 @@ function App() {
               <summary className="text-[#2B3E34] font-bold cursor-pointer list-none flex justify-between items-center text-lg">
                 <span className="flex items-center gap-3">
                   <HelpCircle className="w-5 h-5 text-[#708C69] flex-shrink-0" />
-                  Does it really work offline?
+                  Does it really work offline in remote areas?
                 </span>
                 <ChevronDown className="w-5 h-5 text-[#5E7757] group-open:rotate-180 transition-transform" />
               </summary>
               <p className="text-[#5E7757] mt-4 leading-relaxed pl-8">
-                Yes! Labour Lekka works 100% offline. You can mark attendance, manage payments, and view worker history without any internet connection. If you enable Google Drive cloud storage permission, your data will sync to your own Google Drive storage when you are back online.
+                Yes! Labour Lekka works 100% offline. You can add workers, mark attendance (Hajari), log advances, and view balances without any internet connection. If you enable Google Drive cloud backup permission, your data will sync securely when you are back online.
               </p>
             </details>
 
@@ -331,7 +330,7 @@ function App() {
                 <ChevronDown className="w-5 h-5 text-[#5E7757] group-open:rotate-180 transition-transform" />
               </summary>
               <p className="text-[#5E7757] mt-4 leading-relaxed pl-8">
-                No limits! Add as many workers as you need. Whether you manage 5 domestic helpers or 500 construction labourers, Labour Lekka handles it all with ease.
+                No limits! Add as many workers as you need. Whether you manage 5 seasonal farm workers or 500 plantation labourers, Labour Lekka handles it all with ease.
               </p>
             </details>
 
@@ -390,7 +389,7 @@ function App() {
                 <span className="font-bold text-xl text-white">Labour Lekka</span>
               </div>
               <p className="text-[#FCF3E3]/70 text-sm leading-relaxed">
-                Effortless worker management for households, rural areas, and small businesses. Works offline, completely free.
+                Effortless labour ledger for farmers, contractors, and plantations. Works offline, completely free.
               </p>
             </div>
 
