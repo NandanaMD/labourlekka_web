@@ -1,7 +1,7 @@
 # Privacy Policy for Labour Lekka
 
 **Effective Date:** December 30, 2025  
-**Last Updated:** July 19, 2026
+**Last Updated:** September 26, 2026
 
 ---
 
@@ -22,12 +22,13 @@ Labour Lekka is a local-first, primarily offline mobile application designed to 
 - The App does not operate or maintain backend servers for storing user data.
 - Users may optionally back up and restore their data using their own Google Drive account.
 - Backup files are stored directly in the user's personal Google Drive account and are never stored on our servers.
+- Users may optionally use **Lekka AI**, an AI-powered chatbot that requires an internet connection.
 
 ---
 
 # Information We Do Not Collect
 
-We value your privacy. Labour Lekka does **not** collect, store, process, or transmit your labour records or personal information to our servers.
+We value your privacy. Labour Lekka does **not** collect, store, process, or transmit your labour records or personal information to our own servers, except when you choose a feature that necessarily sends information to a third-party service, such as Lekka AI or Google Drive backup.
 
 Specifically, we do **not**:
 
@@ -37,6 +38,7 @@ Specifically, we do **not**:
 - Display advertisements.
 - Share information with advertisers or marketing partners.
 - Sell, rent, or monetize your data.
+- Use your information to target advertising.
 
 When you choose to use the optional Google Drive backup feature, your backup is stored directly in **your own Google Drive account**. We do not have access to, retain, or store copies of those backup files.
 
@@ -62,6 +64,22 @@ All information remains under your control unless you choose to export or back u
 
 ---
 
+# Lekka AI
+
+Labour Lekka offers **Lekka AI**, an optional chatbot that can help answer questions and provide assistance within the App. Lekka AI is not required for the App's core offline functionality.
+
+When you use Lekka AI:
+
+- The messages, prompts, and other information you choose to submit may be sent to third-party AI service providers so they can generate a response.
+- Do not submit sensitive information, passwords, financial account credentials, or information about another person unless you have permission to do so.
+- The AI service providers may process, retain, or use submitted content to operate, secure, improve, or develop their services. Depending on the provider's terms, settings, and applicable law, this may include using content for model training.
+- Labour Lekka does not sell Lekka AI conversations, use them to target advertisements, or use them for advertising or marketing profiles.
+- AI-generated responses may be inaccurate, incomplete, or inappropriate. You remain responsible for how you use or rely on them.
+
+Lekka AI is a third-party-enabled feature. Its processing is governed by the applicable third-party providers' privacy policies and terms in addition to this Privacy Policy. If you do not want information processed by an AI service provider, do not use Lekka AI.
+
+---
+
 # How Your Information Is Used
 
 The information stored within the App is used solely to provide its intended functionality, including:
@@ -73,8 +91,9 @@ The information stored within the App is used solely to provide its intended fun
 - Creating local exports (PDF, Excel, etc.)
 - Creating and restoring backups
 - Synchronizing backups with your own Google Drive account (only when you explicitly choose to use this feature)
+- Processing prompts and generating responses when you explicitly use Lekka AI
 
-Your information is **never** used for advertising, profiling, analytics, or marketing purposes.
+Except for processing required to provide an optional third-party feature that you choose to use, your information is **never** used by Labour Lekka for advertising, profiling, analytics, or marketing purposes. Labour Lekka does not sell your information.
 
 ---
 
@@ -85,6 +104,7 @@ Labour Lekka is designed with privacy in mind.
 - All data is stored locally on your device.
 - The App does not upload your data to any servers operated by us.
 - Optional backups can be stored in your own Google Drive account.
+- Lekka AI messages are transmitted to third-party AI service providers only when you use the chatbot.
 - Backup files remain under your ownership and control.
 - We cannot access your Google Drive files.
 - Optional security features such as App Lock (PIN or biometric authentication) may be available to help protect your locally stored information.
@@ -174,6 +194,8 @@ Uninstalling Labour Lekka removes all locally stored application data from your 
 
 If you created Google Drive backups, those backups remain in your Google Drive until you choose to delete them.
 
+Lekka AI messages may also be retained by third-party AI service providers under their applicable policies and terms. To request deletion of information held by a third-party provider, you may need to contact that provider directly. Labour Lekka does not control third-party retention or deletion practices.
+
 ---
 
 # Children's Privacy
@@ -194,7 +216,10 @@ Labour Lekka does **not** integrate with:
 - Social media services
 - Tracking SDKs
 
-The App may optionally integrate with **Google Drive** solely to allow users to back up and restore their own data.
+The App may optionally use third-party services for:
+
+- **Google Drive**, to allow users to back up and restore their own data.
+- **AI processing**, to provide responses through Lekka AI.
 
 This integration:
 
@@ -205,6 +230,8 @@ This integration:
 - Does not involve storage of user information on our servers.
 
 Google Drive services are governed by Google's own Privacy Policy and Terms of Service.
+
+AI services are governed by the applicable providers' own privacy policies and terms. We do not sell, rent, or provide your information to third parties for targeted advertising.
 
 ---
 
@@ -241,3 +268,4 @@ By installing and using Labour Lekka, you acknowledge that:
 - You understand how your information is handled.
 - You agree to the terms described in this Privacy Policy.
 - You understand that Google Drive backups are optional and, if used, are stored only within your own Google Drive account.
+- You understand that Lekka AI is optional and that messages submitted to it may be processed, retained, or used for model training by third-party AI service providers under their applicable policies and terms.

@@ -57,7 +57,7 @@ function PrivacyPolicy({ onClose }: PrivacyPolicyProps) {
             <h1 className="text-4xl font-bold mb-3">Privacy Policy</h1>
             <div className="text-slate-300 text-sm">
               <span className="inline-block mr-4">📅 Effective: December 30, 2025</span>
-              <span className="inline-block">📝 Last updated: July 19, 2026</span>
+              <span className="inline-block">📝 Last updated: September 26, 2026</span>
             </div>
           </div>
 
