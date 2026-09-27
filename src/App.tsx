@@ -93,10 +93,6 @@ function App() {
         <section className="flex flex-col-reverse md:flex-row items-center gap-16 py-20 md:py-28">
           {/* Hero Content */}
           <div className="w-full md:w-1/2 flex flex-col items-start text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#708C69]/10 border border-[#708C69]/30 text-[#2B3E34] text-xs font-semibold mb-6">
-              <span className="w-2 h-2 rounded-full bg-[#708C69] animate-pulse" />
-              100% Offline-First App
-            </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#2B3E34] mb-6 leading-[1.15]">
               Track farm labour, <br />
@@ -183,7 +179,7 @@ function App() {
               <div className="w-12 h-12 rounded-xl bg-[#FCF3E3] text-[#2B3E34] flex items-center justify-center mb-6 border border-[#ced8b2]/50">
                 <Calendar className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Daily Hajari (Attendance)</h3>
+              <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Attendance</h3>
               <p className="text-[#5E7757] leading-relaxed">Mark daily worker attendance with simple checkmarks, tracking half-days, full-days, or specific shifts easily.</p>
             </div>
 
@@ -202,7 +198,8 @@ function App() {
                 <WifiOff className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold text-[#2B3E34] mb-3">Works 100% Offline</h3>
-              <p className="text-[#5E7757] leading-relaxed">No internet connection required. Keep all worker and payment records securely on your own device.</p>
+              <p className="text-[#5E7757] leading-relaxed">No internet connection required. Keep all worker and payment records securely on your own device.
+              </p>
             </div>
           </div>
         </section>
