@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
+  ArrowLeft,
   ArrowRight,
   BookOpen,
   CalendarDays,
@@ -52,6 +53,7 @@ const categories = ['All topics', 'Crops', 'Fertilizers', 'Crop protection', 'Pl
 export default function InformationCornerApp() {
   const [query, setQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All topics');
+  const [selectedCropSlug, setSelectedCropSlug] = useState<string | null>(null);
 
   useEffect(() => {
     document.title = 'Information Corner | Labour Lekka';
@@ -80,6 +82,117 @@ export default function InformationCornerApp() {
         .includes(search);
     });
   }, [query]);
+
+  const selectedCrop = cropProfiles.find((crop) => crop.slug === selectedCropSlug);
+  const selectedCropSources = selectedCrop
+    ? sourceRecords.filter((source) => source.crop === selectedCrop.name)
+    : [];
+
+  const openCrop = (slug: string) => {
+    setSelectedCropSlug(slug);
+    window.location.hash = `crop-${slug}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const closeCrop = () => {
+    setSelectedCropSlug(null);
+    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+  };
+
+  if (selectedCrop) {
+    return (
+      <div className="min-h-screen bg-[#FCF3E3] text-[#2B3E34] selection:bg-[#708C69]/20">
+        <header className="sticky top-0 z-30 border-b border-[#ced8b2]/70 bg-[#FCF3E3]/90 backdrop-blur-md">
+          <nav className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 sm:px-6">
+            <button onClick={closeCrop} className="inline-flex items-center gap-2 text-sm font-bold text-[#5E7757] hover:text-[#2B3E34]">
+              <ArrowLeft className="h-4 w-4" /> Information Corner
+            </button>
+            <span className="hidden text-xs font-bold uppercase tracking-[0.12em] text-[#708C69] sm:block">Crop guide</span>
+          </nav>
+        </header>
+        <main className="mx-auto max-w-5xl px-4 pb-20 sm:px-6">
+          <section className="border-b border-[#ced8b2]/70 py-12 sm:py-16">
+            <div className="flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-[#708C69]">
+              <span>{selectedCrop.category}</span>
+              <span className="text-[#ced8b2]">•</span>
+              <span>{selectedCrop.status}</span>
+            </div>
+            <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-6xl">{selectedCrop.name}</h1>
+            <p className="mt-3 text-sm font-medium text-[#5E7757]">{selectedCrop.localNames}</p>
+            <p className="mt-7 max-w-3xl text-lg leading-relaxed text-[#5E7757]">{selectedCrop.overview}</p>
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="rounded-2xl border border-[#ced8b2] bg-white p-5">
+                <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#708C69]">Season</p>
+                <p className="mt-2 text-sm leading-relaxed text-[#5E7757]">{selectedCrop.seasons}</p>
+              </div>
+              <div className="rounded-2xl border border-[#ced8b2] bg-white p-5">
+                <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#708C69]">Soil and site</p>
+                <p className="mt-2 text-sm leading-relaxed text-[#5E7757]">{selectedCrop.soil}</p>
+              </div>
+            </div>
+          </section>
+
+          <section className="grid gap-12 py-12 lg:grid-cols-[1.35fr_0.65fr] sm:py-16">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#708C69]">Crop journey</p>
+              <h2 className="mt-2 text-3xl font-extrabold tracking-tight">What to watch at each stage</h2>
+              <div className="mt-7 space-y-3">
+                {selectedCrop.stages.map((stage, index) => (
+                  <div key={stage.name} className="flex gap-4 rounded-2xl border border-[#ced8b2] bg-white p-5">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#FCF3E3] text-sm font-extrabold text-[#708C69]">{index + 1}</span>
+                    <div>
+                      <h3 className="font-bold">{stage.name}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-[#5E7757]">{stage.guidance}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <aside>
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#708C69]">Good practice</p>
+              <h2 className="mt-2 text-3xl font-extrabold tracking-tight">Care checklist</h2>
+              <ul className="mt-7 space-y-3">
+                {selectedCrop.care.map((item) => (
+                  <li key={item} className="rounded-xl border border-[#ced8b2] bg-white p-4 text-sm leading-relaxed text-[#5E7757]">
+                    <span className="mr-2 font-bold text-[#708C69]">✓</span>{item}
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          </section>
+
+          <section className="border-t border-[#ced8b2]/70 py-12 sm:py-16">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#708C69]">Field problems</p>
+            <h2 className="mt-2 text-3xl font-extrabold tracking-tight">Start with observation</h2>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#5E7757]">A symptom can have more than one cause. Confirm the pattern, crop stage, and local conditions before choosing a treatment.</p>
+            <div className="mt-7 grid gap-4 md:grid-cols-3">
+              {selectedCrop.problems.map((problem) => (
+                <article key={problem.name} className="rounded-2xl border border-[#ced8b2] bg-white p-5">
+                  <h3 className="font-bold">{problem.name}</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-[#5E7757]"><strong className="text-[#2B3E34]">Signs:</strong> {problem.signs}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-[#5E7757]"><strong className="text-[#2B3E34]">First steps:</strong> {problem.firstSteps}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="rounded-3xl bg-[#2B3E34] p-7 text-[#FCF3E3] sm:p-10">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#A8C19D]">Sources for this guide</p>
+            <h2 className="mt-2 text-2xl font-bold text-white">Read the references behind the page</h2>
+            <div className="mt-6 grid gap-3">
+              {selectedCropSources.map((source) => (
+                <a key={source.title} href={source.url} target="_blank" rel="noreferrer" className="rounded-xl border border-[#708C69]/40 bg-[#203329] p-4 transition-colors hover:border-[#A8C19D]">
+                  <p className="text-sm font-bold text-white">{source.title} ↗</p>
+                  <p className="mt-1 text-xs text-[#FCF3E3]/65">{source.organisation} · {source.supports}</p>
+                </a>
+              ))}
+            </div>
+            <p className="mt-6 text-xs leading-relaxed text-[#FCF3E3]/65">This guide is educational and marked {selectedCrop.status.toLowerCase()}. Exact inputs and crop-protection decisions must follow the current local advisory and product label.</p>
+          </section>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#FCF3E3] text-[#2B3E34] selection:bg-[#708C69]/20">
@@ -175,13 +288,13 @@ export default function InformationCornerApp() {
           </div>
           <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {filteredCrops.map((crop) => (
-              <a href={`#crop-${crop.slug}`} key={crop.slug} className="rounded-2xl border border-[#ced8b2] bg-white p-4 transition-colors hover:border-[#708C69]">
+              <button onClick={() => openCrop(crop.slug)} key={crop.slug} className="rounded-2xl border border-[#ced8b2] bg-white p-4 text-left transition-colors hover:border-[#708C69]">
                 <div className="mb-8 flex h-9 w-9 items-center justify-center rounded-full bg-[#FCF3E3] text-[#708C69]">
                   <Sprout className="h-4 w-4" />
                 </div>
                 <h3 className="font-bold">{crop.name}</h3>
                 <p className="mt-1 text-xs text-[#5E7757]">{crop.category}</p>
-              </a>
+              </button>
             ))}
           </div>
           {filteredCrops.length === 0 && (
