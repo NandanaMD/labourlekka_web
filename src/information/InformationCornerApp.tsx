@@ -10,6 +10,8 @@ import {
   Sprout,
   Wheat,
 } from 'lucide-react';
+import { cropProfiles } from './content';
+import { sourceRecords } from './sources';
 
 type LibraryItem = {
   title: string;
@@ -45,15 +47,6 @@ const libraryItems: LibraryItem[] = [
   },
 ];
 
-const featuredCrops = [
-  { name: 'Rice', detail: 'Paddy · cereals' },
-  { name: 'Tomato', detail: 'Vegetable · fruiting' },
-  { name: 'Cotton', detail: 'Fibre · field crop' },
-  { name: 'Coconut', detail: 'Plantation · perennial' },
-  { name: 'Chilli', detail: 'Spice · vegetable' },
-  { name: 'Maize', detail: 'Cereal · field crop' },
-];
-
 const categories = ['All topics', 'Crops', 'Fertilizers', 'Crop protection', 'Planning'];
 
 export default function InformationCornerApp() {
@@ -76,6 +69,17 @@ export default function InformationCornerApp() {
       return matchesCategory && matchesSearch;
     });
   }, [activeCategory, query]);
+
+  const filteredCrops = useMemo(() => {
+    const search = query.trim().toLowerCase();
+    return cropProfiles.filter((crop) => {
+      if (!search) return true;
+      return [crop.name, crop.localNames, crop.category, crop.summary, ...crop.keywords]
+        .join(' ')
+        .toLowerCase()
+        .includes(search);
+    });
+  }, [query]);
 
   return (
     <div className="min-h-screen bg-[#FCF3E3] text-[#2B3E34] selection:bg-[#708C69]/20">
@@ -100,7 +104,7 @@ export default function InformationCornerApp() {
         <section className="mx-auto max-w-4xl pb-14 pt-16 text-center sm:pb-20 sm:pt-24">
           <div className="mx-auto mb-5 flex w-fit items-center gap-2 rounded-full border border-[#ced8b2] bg-white/70 px-3.5 py-2 text-xs font-bold uppercase tracking-[0.14em] text-[#5E7757]">
             <Leaf className="h-3.5 w-3.5 text-[#708C69]" />
-            Practical agriculture knowledge
+            Labour Lekka is determined to help farmers
           </div>
           <h1 className="text-4xl font-extrabold leading-[1.08] tracking-tight text-[#2B3E34] sm:text-6xl">
             Better decisions start with <span className="text-[#708C69]">better information.</span>
@@ -170,16 +174,62 @@ export default function InformationCornerApp() {
             </a>
           </div>
           <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-            {featuredCrops.map((crop) => (
-              <a href={`#crop-${crop.name.toLowerCase()}`} key={crop.name} className="rounded-2xl border border-[#ced8b2] bg-white p-4 transition-colors hover:border-[#708C69]">
+            {filteredCrops.map((crop) => (
+              <a href={`#crop-${crop.slug}`} key={crop.slug} className="rounded-2xl border border-[#ced8b2] bg-white p-4 transition-colors hover:border-[#708C69]">
                 <div className="mb-8 flex h-9 w-9 items-center justify-center rounded-full bg-[#FCF3E3] text-[#708C69]">
                   <Sprout className="h-4 w-4" />
                 </div>
                 <h3 className="font-bold">{crop.name}</h3>
-                <p className="mt-1 text-xs text-[#5E7757]">{crop.detail}</p>
+                <p className="mt-1 text-xs text-[#5E7757]">{crop.category}</p>
               </a>
             ))}
           </div>
+          {filteredCrops.length === 0 && (
+            <p className="mt-8 rounded-2xl border border-dashed border-[#ced8b2] p-6 text-center text-sm text-[#5E7757]">
+              No crops found for “{query}”.
+            </p>
+          )}
+        </section>
+
+        <section className="mt-20 border-t border-[#ced8b2]/70 pt-12 sm:mt-28 sm:pt-16">
+          <div className="max-w-2xl">
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.14em] text-[#708C69]">How we build it</p>
+            <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Reviewed before it is published.</h2>
+            <p className="mt-4 text-sm leading-relaxed text-[#5E7757] sm:text-base">
+              Our starting references come from Indian agricultural institutions. Advice that depends on state, season, crop stage, or product label stays marked for review.
+            </p>
+          </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {[
+              ['01', 'Official sources', 'ICAR, NIPHM, agricultural universities, and government extension resources.'],
+              ['02', 'Local context', 'Region, season, variety, and crop stage stay attached to each record.'],
+              ['03', 'Clear status', 'Draft and in-review material is not presented as a final recommendation.'],
+            ].map(([number, title, description]) => (
+              <div key={number} className="rounded-2xl border border-[#ced8b2] bg-white p-6">
+                <span className="text-sm font-extrabold text-[#708C69]">{number}</span>
+                <h3 className="mt-5 font-bold">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#5E7757]">{description}</p>
+              </div>
+            ))}
+          </div>
+          <details className="mt-8 rounded-2xl border border-[#ced8b2] bg-white">
+            <summary className="cursor-pointer list-none px-6 py-5 text-sm font-bold text-[#2B3E34]">
+              View our initial source register ({sourceRecords.length} references)
+            </summary>
+            <div className="grid gap-4 border-t border-[#ced8b2]/60 px-6 py-6 md:grid-cols-2">
+              {sourceRecords.map((source) => (
+                <div key={`${source.crop}-${source.title}`} className="rounded-xl bg-[#FCF3E3]/70 p-4">
+                  <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#708C69]">{source.crop} · {source.type}</p>
+                  <a href={source.url} target="_blank" rel="noreferrer" className="mt-2 block font-bold text-[#2B3E34] hover:text-[#708C69]">
+                    {source.title} ↗
+                  </a>
+                  <p className="mt-1 text-xs text-[#5E7757]">{source.organisation}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-[#5E7757]">{source.supports}</p>
+                  <p className="mt-2 text-xs leading-relaxed text-[#8A6E4B]">Note: {source.caution}</p>
+                </div>
+              ))}
+            </div>
+          </details>
         </section>
 
         <section className="mt-20 rounded-3xl bg-[#2B3E34] p-7 text-[#FCF3E3] shadow-xl sm:mt-28 sm:p-12">
