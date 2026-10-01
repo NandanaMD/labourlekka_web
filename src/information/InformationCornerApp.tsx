@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { cropProfiles } from './content';
 import { sourceRecords } from './sources';
+import { detailedCropContent } from './detailedContent';
 
 type LibraryItem = {
   title: string;
@@ -153,10 +154,10 @@ const topicCards: Record<string, TopicCard[]> = {
 
 export default function InformationCornerApp() {
   const [language, setLanguage] = useState<Language>('en');
+  const [route, setRoute] = useState(window.location.pathname);
   const [query, setQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All topics');
   const [selectedCropSlug, setSelectedCropSlug] = useState<string | null>(null);
-  const [selectedSection, setSelectedSection] = useState<string | null>(null);
   const [selectedTopic, setSelectedTopic] = useState<TopicCard | null>(null);
   const t = (key: keyof typeof uiText) => uiText[key][language === 'kn' ? 1 : 0];
   const languageToggle = (
@@ -178,6 +179,12 @@ export default function InformationCornerApp() {
 
   useEffect(() => {
     document.title = 'Information Corner | Labour Lekka';
+    const handlePopState = () => {
+      setRoute(window.location.pathname);
+      setSelectedTopic(null);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   const filteredLibrary = useMemo(() => {
@@ -205,39 +212,46 @@ export default function InformationCornerApp() {
     });
   }, [language, query]);
 
-  const selectedCropRecord = cropProfiles.find((crop) => crop.slug === selectedCropSlug);
+  const routeCropSlug = route.match(/^\/crops\/([^/]+)$/)?.[1];
+  const routeSection = route === '/crops' ? 'Crops' : route === '/fertilizers' ? 'Fertilizers' : route === '/crop-protection' ? 'Crop protection' : route === '/planning' ? 'Planning' : null;
+  const selectedCropRecord = cropProfiles.find((crop) => crop.slug === (routeCropSlug ?? selectedCropSlug));
   const selectedCrop = selectedCropRecord ? localizedCrop(selectedCropRecord, language) : undefined;
   const selectedCropSources = selectedCrop
     ? sourceRecords.filter((source) => source.crop === selectedCrop.name)
     : [];
+  const selectedCropDetails = selectedCrop ? detailedCropContent[selectedCrop.slug] ?? [] : [];
 
   const openCrop = (slug: string) => {
+    setSelectedTopic(null);
     setSelectedCropSlug(slug);
-    window.location.hash = `crop-${slug}`;
+    window.history.pushState(null, '', `/crops/${slug}`);
+    setRoute(`/crops/${slug}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const closeCrop = () => {
     setSelectedCropSlug(null);
-    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+    window.history.pushState(null, '', '/crops');
+    setRoute('/crops');
   };
 
   const openSection = (section: string) => {
-    setSelectedSection(section);
     setSelectedTopic(null);
-    window.location.hash = section.toLowerCase().replace(' ', '-');
+    const path = section === 'Crops' ? '/crops' : `/${section.toLowerCase().replace(' ', '-')}`;
+    window.history.pushState(null, '', path);
+    setRoute(path);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const closeSection = () => {
-    setSelectedSection(null);
     setSelectedTopic(null);
-    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+    window.history.pushState(null, '', '/');
+    setRoute('/');
   };
 
-  if (selectedSection) {
-    const isCropSection = selectedSection === 'Crops';
-    const sectionTopics = topicCards[selectedSection] ?? [];
+  if (routeSection) {
+    const isCropSection = routeSection === 'Crops';
+    const sectionTopics = topicCards[routeSection] ?? [];
 
     return (
       <div lang={language} className={`min-h-screen bg-[#FCF3E3] text-[#2B3E34] selection:bg-[#708C69]/20 ${language === 'kn' ? 'font-kannada' : ''}`}>
@@ -246,14 +260,14 @@ export default function InformationCornerApp() {
             <button onClick={closeSection} className="inline-flex items-center gap-2 text-sm font-bold text-[#5E7757] hover:text-[#2B3E34]">
               <ArrowLeft className="h-4 w-4" /> {t('informationCorner')}
             </button>
-            <div className="flex items-center gap-3">{languageToggle}<span className="text-xs font-bold uppercase tracking-[0.12em] text-[#708C69]">{selectedSection}</span></div>
+            <div className="flex items-center gap-3">{languageToggle}<span className="text-xs font-bold uppercase tracking-[0.12em] text-[#708C69]">{routeSection}</span></div>
           </nav>
         </header>
         <main className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
           <section className="mx-auto max-w-3xl py-12 text-center sm:py-16">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#708C69]">{t('informationLibrary')}</p>
             <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">
-              {isCropSection ? t('chooseCrop') : `${t('exploreTopics')} · ${selectedSection}`}
+              {isCropSection ? t('chooseCrop') : `${t('exploreTopics')} · ${routeSection}`}
             </h1>
             <p className="mt-5 text-base leading-relaxed text-[#5E7757]">
               {isCropSection ? t('cropDescription') : t('topicDescription')}
@@ -265,7 +279,7 @@ export default function InformationCornerApp() {
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder={isCropSection ? t('searchCrops') : t('searchTopics')}
                 className="min-w-0 flex-1 bg-transparent px-3 py-3 text-sm outline-none placeholder:text-[#8A9A83]"
-                aria-label={`Search ${selectedSection}`}
+                aria-label={`Search ${routeSection}`}
               />
             </div>
           </section>
@@ -354,6 +368,28 @@ export default function InformationCornerApp() {
             </div>
           </section>
 
+          <section className="border-b border-[#ced8b2]/70 py-12 sm:py-16">
+            <div className="max-w-3xl">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#708C69]">{language === 'kn' ? 'ಬೆಳೆ ಮಾಹಿತಿ' : 'Crop information'}</p>
+              <h2 className="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">{language === 'kn' ? 'ಬೆಳೆಯ ಬಗ್ಗೆ ತಿಳಿದುಕೊಳ್ಳಬೇಕಾದ ಮುಖ್ಯ ವಿಷಯಗಳು' : 'The information you need in one place'}</h2>
+            </div>
+            <div className="mt-8 grid gap-5 lg:grid-cols-3">
+              {selectedCropDetails.map((section) => (
+                <article key={section.title} className="rounded-2xl border border-[#ced8b2] bg-white p-6">
+                  <h3 className="text-xl font-bold">{section.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-[#5E7757]">{section.summary}</p>
+                  <ul className="mt-5 space-y-3">
+                    {section.points.map((point) => (
+                      <li key={point} className="flex gap-2 text-sm leading-relaxed text-[#5E7757]">
+                        <span className="mt-1 text-[#708C69]">•</span><span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </section>
+
           <section className="grid gap-12 py-12 lg:grid-cols-[1.35fr_0.65fr] sm:py-16">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#708C69]">{t('cropJourney')}</p>
@@ -399,17 +435,33 @@ export default function InformationCornerApp() {
           </section>
 
           <section className="rounded-3xl bg-[#2B3E34] p-7 text-[#FCF3E3] sm:p-10">
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#A8C19D]">{t('sources')}</p>
-            <h2 className="mt-2 text-2xl font-bold text-white">{t('sourceTitle')}</h2>
-            <div className="mt-6 grid gap-3">
-              {selectedCropSources.map((source) => (
-                <a key={source.title} href={source.url} target="_blank" rel="noreferrer" className="rounded-xl border border-[#708C69]/40 bg-[#203329] p-4 transition-colors hover:border-[#A8C19D]">
-                  <p className="text-sm font-bold text-white">{source.title} ↗</p>
-                  <p className="mt-1 text-xs text-[#FCF3E3]/65">{source.organisation} · {source.supports}</p>
-                </a>
-              ))}
-            </div>
-            <p className="mt-6 text-xs leading-relaxed text-[#FCF3E3]/65">This guide is educational and marked {selectedCrop.status.toLowerCase()}. Exact inputs and crop-protection decisions must follow the current local advisory and product label.</p>
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#A8C19D]">{language === 'kn' ? 'ಈ ಪುಟದಲ್ಲೇ ಮಾಹಿತಿ' : 'Information on this page'}</p>
+            <h2 className="mt-2 text-2xl font-bold text-white">
+              {language === 'kn' ? 'ಬೆಳೆಯ ಬಗ್ಗೆ ಮುಖ್ಯ ಮಾಹಿತಿಯನ್ನು ಇಲ್ಲಿಯೇ ಓದಿ' : 'Read the crop guidance here'}
+            </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#FCF3E3]/70">
+              {language === 'kn'
+                ? 'ಈ ಮಾರ್ಗದರ್ಶಿಯಲ್ಲಿರುವ ಮಾಹಿತಿ ನಮ್ಮ ಪುಟದಲ್ಲೇ ಓದಲು ಸಿದ್ಧಪಡಿಸಲಾಗಿದೆ. ಕೆಳಗಿನ ಮೂಲಗಳು ಹೆಚ್ಚುವರಿ ಪರಿಶೀಲನೆಗಾಗಿ ಮಾತ್ರ.'
+                : 'The practical guidance is written for this page. The references below are optional if you want to verify or read the original technical material.'}
+            </p>
+            <details className="mt-7 rounded-2xl border border-[#708C69]/40 bg-[#203329]">
+              <summary className="cursor-pointer px-5 py-4 text-sm font-bold text-white">
+                {language === 'kn' ? 'ಮೂಲಗಳನ್ನು ನೋಡಿ' : 'View optional sources'}
+              </summary>
+              <div className="grid gap-3 border-t border-[#708C69]/30 p-4">
+                {selectedCropSources.map((source) => (
+                  <a key={source.title} href={source.url} target="_blank" rel="noreferrer" className="rounded-xl border border-[#708C69]/40 p-4 transition-colors hover:border-[#A8C19D]">
+                    <p className="text-sm font-bold text-white">{source.title} ↗</p>
+                    <p className="mt-1 text-xs text-[#FCF3E3]/65">{source.organisation} · {source.supports}</p>
+                  </a>
+                ))}
+              </div>
+            </details>
+            <p className="mt-6 text-xs leading-relaxed text-[#FCF3E3]/65">
+              {language === 'kn'
+                ? `ಈ ಮಾರ್ಗದರ್ಶಿ ${selectedCrop.status === 'In review' ? 'ಪರಿಶೀಲನೆಯಲ್ಲಿದೆ' : 'ಪ್ರಕಟಿಸಲಾಗಿದೆ'}. ಗೊಬ್ಬರ ಮತ್ತು ಬೆಳೆ ರಕ್ಷಣೆಯ ನಿಖರ ಬಳಕೆಗೆ ಸ್ಥಳೀಯ ಸಲಹೆ ಮತ್ತು ಉತ್ಪನ್ನದ ಲೇಬಲ್ ಪರಿಶೀಲಿಸಿ.`
+                : `This guide is ${selectedCrop.status.toLowerCase()}. For exact input and crop-protection use, check the current local advisory and product label.`}
+            </p>
           </section>
         </main>
       </div>
