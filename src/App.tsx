@@ -111,6 +111,13 @@ function App() {
             <span className="font-bold text-lg sm:text-xl tracking-tight text-[#2B3E34] whitespace-nowrap">Labour Lekka</span>
           </div>
           <div className="flex items-center gap-3.5 sm:gap-6">
+            <a
+              href="https://information.labourlekka.com"
+              className="flex items-center gap-1 sm:gap-1.5 rounded-lg bg-[#708C69] px-2.5 py-2 text-xs font-bold text-white transition-colors hover:bg-[#5E7757] sm:px-3 sm:text-sm"
+            >
+              <Sprout className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              Information Corner
+            </a>
             <a href="#team" className="text-xs sm:text-sm font-semibold text-[#5E7757] hover:text-[#2B3E34] hover:underline transition-colors flex items-center gap-1 sm:gap-1.5">
               <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               Our Team
