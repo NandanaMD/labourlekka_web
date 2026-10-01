@@ -6,6 +6,11 @@
   body {
     @apply font-outfit bg-[#FCF3E3] text-[#2B3E34] antialiased;
   }
+
+  .font-kannada {
+    font-family: 'Noto Sans Kannada', 'Nirmala UI', sans-serif;
+    letter-spacing: 0;
+  }
 }
 
 /* Styles for the privacy policy modal content */
@@ -111,4 +116,3 @@
 	#policy-content, #policy-content * { visibility: visible !important; }
 	#policy-content { position: absolute !important; left: 0 !important; top: 0 !important; width: 100% !important; padding: 2rem !important; background: #fff !important; color: #111 !important; }
 }
-
