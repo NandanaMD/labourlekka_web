@@ -137,23 +137,23 @@ export default function TeamPage() {
 
   return (
     <div className="min-h-screen bg-[#FCF3E3] text-[#2B3E34] relative selection:bg-[#708C69]/20 selection:text-[#2B3E34]">
-      {/* Background Grid Pattern (Olive/Sage lines on warm cream) */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ced8b2_1px,transparent_1px),linear-gradient(to_bottom,#ced8b2_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none z-0" />
+      {/* Background Grid Pattern (Hidden on mobile to eliminate visual noise) */}
+      <div className="hidden sm:block absolute inset-0 bg-[linear-gradient(to_right,#ced8b2_1px,transparent_1px),linear-gradient(to_bottom,#ced8b2_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none z-0" />
 
       {/* Header */}
-      <header className="w-full border-b border-[#ced8b2]/60 bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-sm">
-        <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <img src="logo.png" alt="Labour Lekka logo" className="h-10 w-10 object-contain rounded-xl border border-[#ced8b2] shadow-sm" />
-            <span className="font-bold text-xl tracking-tight text-[#2B3E34]">Labour Lekka</span>
+      <header className="w-full border-b border-[#ced8b2]/60 bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-xs">
+        <nav className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <img src="logo.png" alt="Labour Lekka logo" className="h-8 w-8 sm:h-10 sm:w-10 object-contain rounded-xl border border-[#ced8b2] shadow-xs" />
+            <span className="font-bold text-base sm:text-xl tracking-tight text-[#2B3E34]">Labour Lekka</span>
           </div>
-          <div className="flex items-center gap-6">
-            <a href="#home" className="text-sm font-semibold text-[#5E7757] hover:text-[#2B3E34] hover:underline transition-colors flex items-center gap-1.5">
-              <Home className="w-4 h-4" />
+          <div className="flex items-center gap-4 sm:gap-6">
+            <a href="#home" className="text-xs sm:text-sm font-semibold text-[#5E7757] hover:text-[#2B3E34] hover:underline transition-colors flex items-center gap-1 sm:gap-1.5">
+              <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               Home
             </a>
-            <a href="/privacy-policy.html" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-[#5E7757] hover:text-[#2B3E34] hover:underline transition-colors flex items-center gap-1.5">
-              <FileText className="w-4 h-4" />
+            <a href="/privacy-policy.html" target="_blank" rel="noopener noreferrer" className="hidden sm:flex text-xs sm:text-sm font-semibold text-[#5E7757] hover:text-[#2B3E34] hover:underline transition-colors items-center gap-1 sm:gap-1.5">
+              <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               Privacy
             </a>
           </div>

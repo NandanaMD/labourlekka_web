@@ -100,29 +100,22 @@ function App() {
   // Otherwise render home page
   return (
     <div className="min-h-screen bg-[#FCF3E3] text-[#2B3E34] relative selection:bg-[#708C69]/20 selection:text-[#2B3E34] pb-16 md:pb-0">
-      {/* Background Grid Pattern (Olive/Sage lines on warm cream) */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ced8b2_1px,transparent_1px),linear-gradient(to_bottom,#ced8b2_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none z-0" />
+      {/* Background Grid Pattern (Hidden on mobile to eliminate visual noise) */}
+      <div className="hidden sm:block absolute inset-0 bg-[linear-gradient(to_right,#ced8b2_1px,transparent_1px),linear-gradient(to_bottom,#ced8b2_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none z-0" />
 
       {/* Header */}
-      <header className="w-full border-b border-[#ced8b2]/60 bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-sm">
-        <nav className="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between">
+      <header className="w-full border-b border-[#ced8b2]/60 bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-xs">
+        <nav className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5 sm:gap-3">
-            <img src="logo.png" alt="Labour Lekka logo" className="h-9 w-9 sm:h-10 sm:w-10 object-contain rounded-xl border border-[#ced8b2] shadow-sm" />
-            <span className="font-bold text-lg sm:text-xl tracking-tight text-[#2B3E34] whitespace-nowrap">Labour Lekka</span>
+            <img src="logo.png" alt="Labour Lekka logo" className="h-8 w-8 sm:h-10 sm:w-10 object-contain rounded-xl border border-[#ced8b2] shadow-xs" />
+            <span className="font-bold text-base sm:text-xl tracking-tight text-[#2B3E34] whitespace-nowrap">Labour Lekka</span>
           </div>
           <div className="flex items-center gap-3.5 sm:gap-6">
-            <a
-              href="https://information.labourlekka.com"
-              className="flex items-center gap-1 sm:gap-1.5 rounded-lg bg-[#708C69] px-2.5 py-2 text-xs font-bold text-white transition-colors hover:bg-[#5E7757] sm:px-3 sm:text-sm"
-            >
-              <Sprout className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              Information Corner
-            </a>
             <a href="#team" className="text-xs sm:text-sm font-semibold text-[#5E7757] hover:text-[#2B3E34] hover:underline transition-colors flex items-center gap-1 sm:gap-1.5">
               <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               Our Team
             </a>
-            <a href="/privacy-policy.html" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm font-semibold text-[#5E7757] hover:text-[#2B3E34] hover:underline transition-colors flex items-center gap-1 sm:gap-1.5">
+            <a href="/privacy-policy.html" target="_blank" rel="noopener noreferrer" className="hidden sm:flex text-xs sm:text-sm font-semibold text-[#5E7757] hover:text-[#2B3E34] hover:underline transition-colors items-center gap-1 sm:gap-1.5">
               <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               Privacy Policy
             </a>
@@ -134,26 +127,24 @@ function App() {
       <main className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
 
         {/* Hero Section */}
-        <section className="flex flex-col md:flex-row items-center gap-8 md:gap-16 pt-8 pb-12 md:py-24">
+        <section className="flex flex-col md:flex-row items-center gap-8 md:gap-16 pt-6 pb-10 sm:pt-8 sm:pb-12 md:py-24">
           {/* Hero Content */}
           <div className="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
 
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#2B3E34] mb-4 sm:mb-6 leading-[1.18] sm:leading-[1.15]">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#2B3E34] mb-3 sm:mb-6 leading-[1.2] sm:leading-[1.15]">
               Track farm labour, <br className="hidden sm:inline" />
               <span className="text-[#708C69]">even offline.</span>
             </h1>
 
-            <p className="text-base sm:text-lg text-[#5E7757] mb-6 sm:mb-8 max-w-xl leading-relaxed">
-              Labour Lekka helps farmers, agricultural contractors, and estate owners manage worker attendance (<i>Hajari</i>) and wage advances (<i>Hisab-Kitab</i>) reliably—without needing internet access.
+            <p className="text-sm sm:text-lg text-[#5E7757] mb-6 sm:mb-8 max-w-xl leading-relaxed">
+              Labour Lekka helps farmers, contractors, and estate owners manage worker attendance and wage advances reliably—100% offline.
             </p>
 
             {/* Download CTA with Official Google Play Badge */}
-            <div className="flex flex-col items-center md:items-start w-full gap-3 pt-1 pb-3">
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-bold text-[#2B3E34] tracking-tight uppercase">
-                  Download Labour Lekka
-                </span>
-              </div>
+            <div className="flex flex-col items-center md:items-start w-full gap-2.5 sm:gap-3 pb-2">
+              <span className="hidden sm:inline-block text-xs sm:text-sm font-bold text-[#2B3E34] tracking-wider uppercase opacity-80">
+                Download Labour Lekka
+              </span>
 
               <a
                 href="https://play.google.com/store/apps/details?id=com.nmd.labourlekka"
@@ -165,21 +156,19 @@ function App() {
                 <img
                   src="google-play-badge.svg"
                   alt="Download Labour Lekka on Google Play"
-                  className="h-14 sm:h-16 w-auto object-contain"
+                  className="h-12 sm:h-16 w-auto object-contain"
                 />
               </a>
 
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-1 text-xs text-[#5E7757] font-medium pt-0.5">
-                <span className="flex items-center gap-1">
-                  <CheckCircle className="w-3.5 h-3.5 text-[#708C69]" /> Free Core Features
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-[#5E7757] font-medium pt-1">
+                <span className="inline-flex items-center gap-1 bg-white/80 backdrop-blur-xs px-2.5 py-1 rounded-full border border-[#ced8b2]/70 shadow-2xs">
+                  <CheckCircle className="w-3.5 h-3.5 text-[#708C69]" /> Free Core
                 </span>
-                <span>•</span>
-                <span className="flex items-center gap-1">
-                  <WifiOff className="w-3.5 h-3.5 text-[#708C69]" /> Works 100% Offline
+                <span className="inline-flex items-center gap-1 bg-white/80 backdrop-blur-xs px-2.5 py-1 rounded-full border border-[#ced8b2]/70 shadow-2xs">
+                  <WifiOff className="w-3.5 h-3.5 text-[#708C69]" /> 100% Offline
                 </span>
-                <span>•</span>
-                <span className="flex items-center gap-1 font-semibold text-[#2B3E34]">
-                  ⭐ 4.8 Play Store
+                <span className="inline-flex items-center gap-1 bg-white/80 backdrop-blur-xs px-2.5 py-1 rounded-full border border-[#ced8b2]/70 shadow-2xs font-semibold text-[#2B3E34]">
+                  ⭐ 4.8 Rating
                 </span>
               </div>
             </div>
@@ -188,7 +177,7 @@ function App() {
           {/* Hero Slider with Square Flyer Frame */}
           <div className="w-full md:w-1/2 flex justify-center md:justify-end">
             <div
-              className="relative w-full max-w-[340px] sm:max-w-[400px] aspect-square bg-white border border-[#ced8b2] rounded-2xl shadow-[0_15px_40px_-10px_rgba(43,62,52,0.15)] overflow-hidden group touch-pan-y"
+              className="relative w-full max-w-[320px] sm:max-w-[400px] aspect-square bg-white border border-[#ced8b2] rounded-2xl shadow-[0_15px_40px_-10px_rgba(43,62,52,0.15)] overflow-hidden group touch-pan-y"
               onTouchStart={onTouchStart}
               onTouchMove={onTouchMove}
               onTouchEnd={onTouchEnd}
@@ -208,17 +197,17 @@ function App() {
                 ))}
               </div>
 
-              {/* Slider Controls Overlay */}
+              {/* Slider Controls Overlay (Hidden on mobile touch screens for a clean, unobstructed view) */}
               <button
                 onClick={prevSlide}
-                className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-[#FCF3E3] text-[#2B3E34] p-2 sm:p-2.5 rounded-full border border-[#ced8b2] transition-all opacity-70 hover:opacity-100 md:opacity-0 md:group-hover:opacity-100 z-30 shadow-md"
+                className="hidden md:flex absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-[#FCF3E3] text-[#2B3E34] p-2 sm:p-2.5 rounded-full border border-[#ced8b2] transition-all opacity-0 group-hover:opacity-100 z-30 shadow-md"
                 aria-label="Previous slide"
               >
                 <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
               <button
                 onClick={nextSlide}
-                className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-[#FCF3E3] text-[#2B3E34] p-2 sm:p-2.5 rounded-full border border-[#ced8b2] transition-all opacity-70 hover:opacity-100 md:opacity-0 md:group-hover:opacity-100 z-30 shadow-md"
+                className="hidden md:flex absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-[#FCF3E3] text-[#2B3E34] p-2 sm:p-2.5 rounded-full border border-[#ced8b2] transition-all opacity-0 group-hover:opacity-100 z-30 shadow-md"
                 aria-label="Next slide"
               >
                 <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
