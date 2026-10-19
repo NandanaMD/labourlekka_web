@@ -12,9 +12,11 @@ import {
   HelpCircle,
   Users,
   Sprout,
-  Briefcase
+  Briefcase,
+  Video
 } from 'lucide-react';
 import TeamPage from './TeamPage';
+import VideoGuidesPage from './VideoGuidesPage';
 
 const images = [
   { src: 'post1.png', alt: 'Labour Lekka App Screen 1' },
@@ -97,6 +99,11 @@ function App() {
     return <TeamPage />;
   }
 
+  // Render video guides page if on guides/help route
+  if (currentPage.startsWith('guides') || currentPage.startsWith('help') || currentPage.startsWith('video')) {
+    return <VideoGuidesPage />;
+  }
+
   // Otherwise render home page
   return (
     <div className="min-h-screen bg-[#FCF3E3] text-[#2B3E34] relative selection:bg-[#708C69]/20 selection:text-[#2B3E34] pb-16 md:pb-0">
@@ -111,6 +118,10 @@ function App() {
             <span className="font-bold text-base sm:text-xl tracking-tight text-[#2B3E34] whitespace-nowrap">Labour Lekka</span>
           </div>
           <div className="flex items-center gap-3.5 sm:gap-6">
+            <a href="#guides" className="text-xs sm:text-sm font-semibold text-[#5E7757] hover:text-[#2B3E34] hover:underline transition-colors flex items-center gap-1 sm:gap-1.5">
+              <Video className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              Video Guides
+            </a>
             <a href="#team" className="text-xs sm:text-sm font-semibold text-[#5E7757] hover:text-[#2B3E34] hover:underline transition-colors flex items-center gap-1 sm:gap-1.5">
               <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               Our Team
@@ -517,6 +528,7 @@ function App() {
             <div>
               <h3 className="text-white font-bold mb-4 text-base tracking-wider uppercase">Quick Links</h3>
               <ul className="space-y-3">
+                <li><a href="#guides" className="text-[#FCF3E3]/70 hover:text-white text-sm transition-colors">Video Guides</a></li>
                 <li><a href="#team" className="text-[#FCF3E3]/70 hover:text-white text-sm transition-colors">Our Team</a></li>
                 <li><a href="/privacy-policy.html" target="_blank" className="text-[#FCF3E3]/70 hover:text-white text-sm transition-colors">Privacy Policy</a></li>
                 <li><a href="/data-deletion.html" target="_blank" className="text-[#FCF3E3]/70 hover:text-white text-sm transition-colors">Data Deletion Guide</a></li>
