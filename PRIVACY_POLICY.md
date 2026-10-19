@@ -249,7 +249,7 @@ If you have any questions about this Privacy Policy, please contact:
 
 **Developer:** Nandan MD
 
-**Email:** thisisnandanmd@gmail.com
+**Email:** labourlekka@gmail.com
 
 **Location:** Bengaluru, Karnataka, India
 
